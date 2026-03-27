@@ -4,17 +4,13 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Analytics View - Data Analysts</title>
+    <title>Analytics Command — Ward-Wise Intelligence</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Noto+Sans:wght@400;500;600&amp;display=swap"
-        rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <link rel="stylesheet" href="../authority-theme.css" />
 
     <script>
         tailwind.config = {
@@ -22,60 +18,28 @@
             theme: {
                 extend: {
                     colors: {
-                        "primary": "#00cbe6",
-                        "background-light": "#f1f4f4",
-                        "background-dark": "#132729",
-                        "surface-dark": "#293839",
-                        "border-dark": "#475051",
-                        "accent-orange": "#fa5c38",
-                        "accent-lime": "#0bda54"
+                        "primary":          "#ff4500",
+                        "primary-dim":      "#ad2c00",
+                        "background-dark":  "#0d131f",
+                        "surface-dark":     "#111927",
+                        "border-dark":      "#1e2d42",
+                        "accent-orange":    "#f97316",
+                        "accent-lime":      "#22c55e",
+                        "accent-red":       "#ef4444",
                     },
                     fontFamily: {
                         "display": ["Space Grotesk", "sans-serif"],
-                        "sans": ["Noto Sans", "sans-serif"]
+                        "sans":    ["Space Grotesk", "sans-serif"],
                     },
-                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                    borderRadius: { "DEFAULT": "0.375rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
                 },
             },
         }
     </script>
-    <style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-
-        .grid-bg {
-            background-image: radial-gradient(rgba(71, 80, 81, 0.2) 1px, transparent 0);
-            background-size: 24px 24px;
-        }
-
-        .confidence-band {
-            fill: rgba(0, 203, 230, 0.1);
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        .tab-active {
-            background-color: #293839;
-            border-left-width: 4px;
-            border-color: #00cbe6;
-            color: white;
-        }
-
-        .tab-inactive {
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        .tab-inactive:hover {
-            color: white;
-        }
-    </style>
+    <style>/* Styles provided by authority-theme.css */</style>
 </head>
 
-<body
-    class="bg-background-light dark:bg-background-dark font-sans text-slate-900 dark:text-slate-100 min-h-screen grid-bg overflow-hidden">
+<body class="bg-background-dark text-white min-h-screen grid-bg overflow-hidden">
 
     <!-- Preloader Removed -->
 
