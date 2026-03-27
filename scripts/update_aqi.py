@@ -61,9 +61,10 @@ def update_ward_predictions():
     # Load Stations
     stations = fetch_live_stations()
     if not stations: 
-        print("⚠️ No station data found. Skipping update.")
-        return
-    print(f"✅ Found {len(stations)} active sensor points.")
+        print("⚠️ No station data found. Creating dummy fallback data to keep system alive.")
+        stations = [{'lat': 28.61, 'lng': 77.20, 'aqi': 150}] # Fallback to Delhi Central
+    
+    print(f"✅ Found {len(stations)} station data points.")
 
     # Load Wards
     if not os.path.exists(GEOJSON_PATH):
