@@ -1,0 +1,34 @@
+name: Automated Delhi Ward AQI Updater
+
+on:
+  schedule:
+    - cron: '0 * * * *' # Every 60 minutes
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  update_aqi:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install Dependencies
+        run: pip install requests
+
+      - name: Run AQI Update Script
+        env:
+          DATA_GOV_KEY: ${{ secrets.DATA_GOV_KEY }}
+        run: python scripts/update_aqi.py
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "Ward-Wise Delhi AI Bot"
+          git config --global user.email "bot@delhiaqi.gov"
+          git add public/data/ward_aqi.json
+          git commit -m "🤖 [BOT] Update Hourly Ward-Wise AQI Predictions" || echo "No changes to commit"
+          git push origin main
