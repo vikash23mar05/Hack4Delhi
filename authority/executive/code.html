@@ -544,54 +544,61 @@
                     <div class="lg:col-span-2">
                         <div class="bg-card-dark rounded-xl overflow-hidden border border-white/5">
                             <div class="p-6 border-b border-white/5 flex justify-between items-center">
-                                <h3 class="font-bold text-lg">Live Violation Feed</h3>
-                                <span class="flex h-2 w-2 relative">
-                                    <span
-                                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                                    <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
-                                </span>
-                            </div>
-                            <div class="divide-y divide-white/5">
-                                <div class="p-4 hover:bg-white/5 transition-colors flex justify-between items-center">
-                                    <div>
-                                        <p class="font-bold text-sm">Illegal Waste Burning</p>
-                                        <p class="text-xs text-white/50">Ward 44 • 2 mins ago</p>
-                                    </div>
-                                    <span
-                                        class="text-xs font-bold bg-red-500/20 text-red-500 px-2 py-1 rounded">PENDING</span>
+                                <div>
+                                    <h3 class="font-bold text-lg">Live Violation Feed</h3>
+                                    <p class="text-xs text-white/40 mt-0.5">Auto-updating • Real-time enforcement tracking</p>
                                 </div>
-                                <div class="p-4 hover:bg-white/5 transition-colors flex justify-between items-center">
-                                    <div>
-                                        <p class="font-bold text-sm">Construction Dust</p>
-                                        <p class="text-xs text-white/50">Ward 12 • 15 mins ago</p>
-                                    </div>
-                                    <span
-                                        class="text-xs font-bold bg-yellow-500/20 text-yellow-500 px-2 py-1 rounded">ASSIGNED</span>
-                                </div>
-                                <div class="p-4 hover:bg-white/5 transition-colors flex justify-between items-center">
-                                    <div>
-                                        <p class="font-bold text-sm">Industrial Emission</p>
-                                        <p class="text-xs text-white/50">Ward 08 • 42 mins ago</p>
-                                    </div>
-                                    <span
-                                        class="text-xs font-bold bg-green-500/20 text-green-500 px-2 py-1 rounded">RESOLVED</span>
+                                <div class="flex items-center gap-3">
+                                    <span class="text-xs text-white/40" id="breach-counter">0 active</span>
+                                    <span class="flex h-2 w-2 relative">
+                                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                                        <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                                    </span>
                                 </div>
                             </div>
+                            <!-- Live violations rendered here by JS -->
+                            <div id="violation-feed" class="divide-y divide-white/5 max-h-[420px] overflow-y-auto"></div>
                         </div>
                     </div>
-                    <div class="space-y-6">
-                        <div
-                            class="bg-gradient-to-br from-primary/20 to-primary/5 p-6 rounded-xl border border-primary/20 text-center">
-                            <h4 class="text-primary font-bold uppercase tracking-widest text-xs mb-2">Total Challans
-                                Issued</h4>
-                            <p class="text-5xl font-black text-white mb-2">1,248</p>
+                    <div class="space-y-4">
+                        <!-- Status breakdown -->
+                        <div class="bg-card-dark rounded-xl p-5 border border-white/5">
+                            <h4 class="text-xs font-bold uppercase tracking-widest text-white/50 mb-4">Status Breakdown</h4>
+                            <div class="space-y-3">
+                                <div class="flex justify-between items-center">
+                                    <span class="flex items-center gap-2 text-xs font-bold">
+                                        <span class="w-2 h-2 rounded-full bg-red-500"></span>ACTIVE
+                                    </span>
+                                    <span class="text-xs font-black text-red-400" id="count-active">0</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="flex items-center gap-2 text-xs font-bold">
+                                        <span class="w-2 h-2 rounded-full bg-yellow-400"></span>ASSIGNED
+                                    </span>
+                                    <span class="text-xs font-black text-yellow-400" id="count-assigned">0</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="flex items-center gap-2 text-xs font-bold">
+                                        <span class="w-2 h-2 rounded-full bg-blue-400"></span>ACTIONED
+                                    </span>
+                                    <span class="text-xs font-black text-blue-400" id="count-actioned">0</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="flex items-center gap-2 text-xs font-bold">
+                                        <span class="w-2 h-2 rounded-full bg-green-400"></span>CLOSED
+                                    </span>
+                                    <span class="text-xs font-black text-green-400" id="count-closed">0</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-gradient-to-br from-primary/20 to-primary/5 p-5 rounded-xl border border-primary/20 text-center">
+                            <h4 class="text-primary font-bold uppercase tracking-widest text-xs mb-2">Total Challans Issued</h4>
+                            <p class="text-4xl font-black text-white mb-1" id="challan-count">1,248</p>
                             <p class="text-xs text-white/50">Last 24 Hours</p>
                         </div>
-                        <div
-                            class="bg-gradient-to-br from-accent-red/20 to-accent-red/5 p-6 rounded-xl border border-accent-red/20 text-center">
-                            <h4 class="text-accent-red font-bold uppercase tracking-widest text-xs mb-2">Revenue
-                                Collected</h4>
-                            <p class="text-5xl font-black text-white mb-2">₹4.2L</p>
+                        <div class="bg-gradient-to-br from-accent-red/20 to-accent-red/5 p-5 rounded-xl border border-accent-red/20 text-center">
+                            <h4 class="text-accent-red font-bold uppercase tracking-widest text-xs mb-2">Revenue Collected</h4>
+                            <p class="text-4xl font-black text-white mb-1" id="revenue-amount">₹4.2L</p>
                             <p class="text-xs text-white/50">Environmental Compensation</p>
                         </div>
                     </div>
@@ -897,6 +904,136 @@
                 }, 2000);
             }
         };
+
+        // =============================================
+        // LIVE ENFORCEMENT FEED ENGINE
+        // =============================================
+        (function() {
+            const VIOLATION_TYPES = [
+                'Illegal Waste Burning', 'Construction Dust Violation', 'Industrial Emission',
+                'Diesel Generator Exhaust', 'Open Biomass Burning', 'Unpaved Road Dust',
+                'Vehicle Smoke Emission', 'Unauthorized Brick Kiln', 'Chemical Waste Dumping'
+            ];
+            const WARDS = [
+                'Ward 12', 'Ward 19', 'Ward 08', 'Ward 44', 'Ward 33',
+                'Ward 27', 'Ward 55', 'Ward 03', 'Ward 71', 'Ward 88'
+            ];
+            const STATUS_FLOW = ['ACTIVE', 'ASSIGNED', 'ACTIONED', 'CLOSED'];
+            const STATUS_STYLES = {
+                'ACTIVE':   { bg: 'bg-red-500/20',    text: 'text-red-400' },
+                'ASSIGNED': { bg: 'bg-yellow-500/20', text: 'text-yellow-400' },
+                'ACTIONED': { bg: 'bg-blue-500/20',   text: 'text-blue-400' },
+                'CLOSED':   { bg: 'bg-green-500/20',  text: 'text-green-400' }
+            };
+
+            let violations = [];
+            let challanCount = 1248;
+            let revenueUnits = 420000; // in rupees
+            let nextId = 1;
+
+            function rand(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+            function timeAgo(ts) {
+                const d = Math.floor((Date.now() - ts) / 1000);
+                if (d < 60) return d + 's ago';
+                if (d < 3600) return Math.floor(d/60) + 'm ago';
+                return Math.floor(d/3600) + 'h ago';
+            }
+
+            function addViolation() {
+                violations.unshift({
+                    id: nextId++,
+                    type: rand(VIOLATION_TYPES),
+                    ward: rand(WARDS),
+                    ts: Date.now(),
+                    statusIdx: 0
+                });
+                // Keep max 12 in feed
+                if (violations.length > 12) violations.splice(12);
+            }
+
+            function advanceStatuses() {
+                violations.forEach(v => {
+                    // Each violation has a random chance to advance
+                    if (v.statusIdx < STATUS_FLOW.length - 1 && Math.random() < 0.35) {
+                        v.statusIdx++;
+                        if (STATUS_FLOW[v.statusIdx] === 'CLOSED') {
+                            challanCount++;
+                            revenueUnits += Math.floor(Math.random() * 20000) + 5000;
+                        }
+                    }
+                });
+            }
+
+            function renderFeed() {
+                const feed = document.getElementById('violation-feed');
+                if (!feed) return;
+
+                const counts = { ACTIVE: 0, ASSIGNED: 0, ACTIONED: 0, CLOSED: 0 };
+                violations.forEach(v => counts[STATUS_FLOW[v.statusIdx]]++);
+
+                // Update status counters
+                ['active','assigned','actioned','closed'].forEach(s => {
+                    const el = document.getElementById('count-' + s);
+                    if (el) el.textContent = counts[s.toUpperCase()];
+                });
+
+                const activeCount = counts.ACTIVE + counts.ASSIGNED + counts.ACTIONED;
+                const bc = document.getElementById('breach-counter');
+                if (bc) bc.textContent = activeCount + ' active';
+
+                // Update challan + revenue
+                const cc = document.getElementById('challan-count');
+                if (cc) cc.textContent = challanCount.toLocaleString('en-IN');
+                const ra = document.getElementById('revenue-amount');
+                if (ra) {
+                    const lakh = revenueUnits / 100000;
+                    ra.textContent = '₹' + lakh.toFixed(1) + 'L';
+                }
+
+                // Render rows
+                feed.innerHTML = violations.map(v => {
+                    const status = STATUS_FLOW[v.statusIdx];
+                    const style = STATUS_STYLES[status];
+                    return `<div class="p-4 hover:bg-white/5 transition-all duration-300 flex justify-between items-center">
+                        <div>
+                            <p class="font-bold text-sm">${v.type}</p>
+                            <p class="text-xs text-white/50">${v.ward} • ${timeAgo(v.ts)}</p>
+                        </div>
+                        <span class="text-xs font-black ${style.bg} ${style.text} px-3 py-1 rounded-full tracking-wider transition-all duration-500">${status}</span>
+                    </div>`;
+                }).join('');
+            }
+
+            // Seed 5 violations at different statuses
+            for (let i = 0; i < 5; i++) {
+                addViolation();
+                violations[i].statusIdx = Math.min(i, STATUS_FLOW.length - 1);
+                violations[i].ts -= i * 8 * 60 * 1000; // spread timestamps
+            }
+
+            // Initial render
+            renderFeed();
+
+            // New violation every 8–14 seconds
+            function scheduleNewViolation() {
+                const delay = 8000 + Math.random() * 6000;
+                setTimeout(() => {
+                    addViolation();
+                    renderFeed();
+                    scheduleNewViolation();
+                }, delay);
+            }
+            scheduleNewViolation();
+
+            // Advance statuses every 4 seconds
+            setInterval(() => {
+                advanceStatuses();
+                renderFeed();
+            }, 4000);
+
+            // Refresh timestamps every 30 seconds
+            setInterval(renderFeed, 30000);
+        })();
 
         // Tab Logic
         function switchTab(tabId) {
