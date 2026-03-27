@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Operational View - Department Heads</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#00cbe6",
+                        "background-light": "#f1f3f4",
+                        "background-dark": "#11252c",
+                        "surface": "#1b333a",
+                        "surface-accent": "#27383a",
+                        "aqi-good": "#3DB324",
+                        "aqi-moderate": "#D99419",
+                        "aqi-poor": "#CC1A1A",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #27383a;
+            border-radius: 10px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .tab-active {
+            color: #00cbe6;
+            border-bottom: 2px solid #00cbe6;
+        }
+
+        .tab-inactive {
+            color: #9ab8bc;
+        }
+
+        .tab-inactive:hover {
+            color: white;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark font-display text-white selection:bg-primary/30 overflow-hidden">
+
+    <!-- Preloader Removed -->
+
+    <!-- Map Tooltip -->
+    <div id="map-tooltip"
+        class="fixed hidden z-[9999] bg-black/90 text-white p-3 rounded-lg pointer-events-none border border-white/20 shadow-xl backdrop-blur-md">
+        <div class="font-bold text-sm mb-1" id="tooltip-name">Ward Name</div>
+        <div class="flex items-center gap-2 text-xs">
+            <span class="text-gray-400">AQI:</span>
+            <span class="font-bold text-primary text-lg leading-none" id="tooltip-aqi">--</span>
+        </div>
+    </div>
+
+    <!-- Top Navigation Bar -->
+    <header
+        class="flex items-center justify-between border-b border-surface-accent bg-background-dark px-6 py-3 sticky top-0 z-50 h-16">
+        <div class="flex items-center gap-6">
+            <div class="flex items-center gap-3">
+                <div class="size-8 bg-primary/20 rounded-lg flex items-center justify-center text-primary">
+                    <span class="material-symbols-outlined">analytics</span>
+                </div>
+                <div>
+                    <h1 class="text-white text-lg font-bold leading-tight tracking-tight">Operational Planning</h1>
+                    <p class="text-xs text-[#9ab8bc]">Authority Management Console</p>
+                </div>
+            </div>
+            <!-- Tabs Navigation -->
+            <nav class="hidden lg:flex items-center gap-6 ml-8">
+                <button id="tab-live" class="tab-active text-sm font-semibold pb-1 transition-colors"
+                    onclick="switchTab('live')">Live Operations</button>
+                <button id="tab-resources" class="tab-inactive text-sm font-medium pb-1 transition-colors"
+                    onclick="switchTab('resources')">Resource Allocation</button>
+                <button id="tab-sla" class="tab-inactive text-sm font-medium pb-1 transition-colors"
+                    onclick="switchTab('sla')">SLA Reports</button>
+            </nav>
+        </div>
+        <div class="flex items-center gap-4">
+            <button onclick="exportPDF()"
+                class="flex items-center gap-2 px-3 py-1.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg text-white text-xs font-bold transition-colors">
+                <span class="material-symbols-outlined text-sm">picture_as_pdf</span>
+                Export Report
+            </button>
+            <div class="h-8 w-px bg-surface-accent mx-2"></div>
+            <div class="flex items-center gap-2">
+                <span class="text-xs text-[#9ab8bc] font-medium uppercase tracking-wider">Department</span>
+                <button
+                    class="flex items-center gap-2 px-3 py-1.5 bg-primary/10 border border-primary/20 rounded-lg text-primary text-sm font-bold">
+                    <span class="material-symbols-outlined text-sm">local_shipping</span>
+                    Transport &amp; Logistics
+                    <span class="material-symbols-outlined text-sm">expand_more</span>
+                </button>
+            </div>
+            <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-9 border border-surface-accent"
+                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC1T7PimV4JLHsdvCJAB2vh36RpvK-2x7vMvlp3EnMXQRrTYsBWYNTdWFT61KJ45hChAH8NDVJyJZCN8k6D7ifpP1UftISQ0CEkqocJDaMGD_A1sWz_BJELWOBaiPHxsmn0t9JvCX8FJAWAdvjdu9nnI717JT3Xv05mYtrCRz5Bbv7iCWNYt8xwaMthLicR4Qjb8wmd7AwieW-D7S44dVLus1kpn2emhVSH9A_HOGXubtXJKyHjLFzTC5JFTfLc_89SfhCzgvAc8b0");'>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex h-[calc(100vh-64px)] overflow-hidden">
+        <!-- Left Sidebar: Interactive Ward Map -->
+        <aside class="w-2/5 border-r border-surface-accent flex flex-col relative bg-surface">
+            <!-- Map Controls Overlays -->
+            <div class="absolute top-4 left-4 z-[400] flex flex-col gap-2">
+                <div
+                    class="bg-background-dark/80 backdrop-blur-md p-1 rounded-lg border border-surface-accent flex flex-col shadow-xl">
+                    <button class="p-2 hover:bg-surface-accent rounded transition-colors text-white"
+                        onclick="map.zoomIn()">
+                        <span class="material-symbols-outlined">add</span>
+                    </button>
+                    <div class="h-px bg-surface-accent mx-1"></div>
+                    <button class="p-2 hover:bg-surface-accent rounded transition-colors text-white"
+                        onclick="map.zoomOut()">
+                        <span class="material-symbols-outlined">remove</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Map Container -->
+            <div id="map-container" class="flex-1 w-full h-full z-0"></div>
+
+            <!-- Ward Quick Info Overlay -->
+            <div
+                class="absolute bottom-0 left-0 right-0 p-4 bg-background-dark/95 backdrop-blur border-t border-surface-accent z-[400]">
+                <div class="flex items-center justify-between mb-3">
+                    <h3 class="font-bold text-sm text-white flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary">location_on</span>
+                        <span id="selected-ward-name">Select a Ward</span>
+                    </h3>
+                    <div class="flex gap-2">
+                        <button
+                            class="px-2 py-1 bg-surface-accent rounded text-[10px] font-bold hover:bg-primary/20 transition-colors">HISTORY</button>
+                    </div>
+                </div>
+                <div class="grid grid-cols-3 gap-4">
+                    <div class="bg-surface p-2 rounded border border-surface-accent">
+                        <p class="text-[10px] text-[#9ab8bc] uppercase font-bold">AQI Level</p>
+                        <div class="flex items-center gap-1.5 mt-1">
+                            <span class="material-symbols-outlined text-primary text-sm">air</span>
+                            <span class="text-sm font-bold" id="selected-ward-aqi">--</span>
+                        </div>
+                    </div>
+                    <div class="bg-surface p-2 rounded border border-surface-accent">
+                        <p class="text-[10px] text-[#9ab8bc] uppercase font-bold">Trend</p>
+                        <div class="flex items-center gap-1.5 mt-1">
+                            <span class="material-symbols-outlined text-aqi-poor text-sm">trending_up</span>
+                            <span class="text-sm font-bold">+12% (1h)</span>
+                        </div>
+                    </div>
+                    <div class="bg-surface p-2 rounded border border-surface-accent">
+                        <p class="text-[10px] text-[#9ab8bc] uppercase font-bold">Active Assets</p>
+                        <div class="flex items-center gap-1.5 mt-1">
+                            <span class="material-symbols-outlined text-primary text-sm">sprinkler</span>
+                            <span class="text-sm font-bold">04 Units</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Right Panel: Tabbed Content -->
+        <section class="flex-1 flex flex-col bg-background-dark overflow-y-auto custom-scrollbar relative">
+
+            <!-- LIVE OPERATIONS TAB -->
+            <div id="content-live"
+                class="flex flex-col gap-6 p-6 animate-in fade-in slide-in-from-right-4 duration-500">
+                <!-- Source Attribution -->
+                <div>
+                    <div class="flex items-center justify-between mb-6">
+                        <div>
+                            <h2 class="text-lg font-bold text-white tracking-tight">Source Attribution</h2>
+                            <p class="text-xs text-[#9ab8bc]">Current load distribution for Selected Ward</p>
+                        </div>
+                        <button class="text-primary text-xs font-bold hover:underline">VIEW SECTOR DETAILS</button>
+                    </div>
+                    <div class="space-y-5">
+                        <!-- Progress Bar Item -->
+                        <div>
+                            <div class="flex justify-between text-xs font-bold mb-1.5 uppercase tracking-wider">
+                                <span class="flex items-center gap-2"><span
+                                        class="material-symbols-outlined text-sm">traffic</span> Traffic
+                                    Emissions</span>
+                                <span class="text-white">42%</span>
+                            </div>
+                            <div class="h-2 w-full bg-surface-accent rounded-full overflow-hidden">
+                                <div class="h-full bg-aqi-poor rounded-full" style="width: 42%"></div>
+                            </div>
+                        </div>
+                        <!-- Progress Bar Item -->
+                        <div>
+                            <div class="flex justify-between text-xs font-bold mb-1.5 uppercase tracking-wider">
+                                <span class="flex items-center gap-2"><span
+                                        class="material-symbols-outlined text-sm">construction</span> Road &amp; Soil
+                                    Dust</span>
+                                <span class="text-white">28%</span>
+                            </div>
+                            <div class="h-2 w-full bg-surface-accent rounded-full overflow-hidden">
+                                <div class="h-full bg-aqi-moderate rounded-full" style="width: 28%"></div>
+                            </div>
+                        </div>
+                        <!-- Progress Bar Item -->
+                        <div>
+                            <div class="flex justify-between text-xs font-bold mb-1.5 uppercase tracking-wider">
+                                <span class="flex items-center gap-2"><span
+                                        class="material-symbols-outlined text-sm">factory</span> Industrial
+                                    Exhaust</span>
+                                <span class="text-white">18%</span>
+                            </div>
+                            <div class="h-2 w-full bg-surface-accent rounded-full overflow-hidden">
+                                <div class="h-full bg-primary rounded-full" style="width: 18%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="border-surface-accent" />
+
+                <!-- Action Recommendations -->
+                <div>
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-lg font-bold text-white tracking-tight">Priority Action Recommendations</h2>
+                        <span
+                            class="bg-aqi-poor/20 text-aqi-poor text-[10px] font-black px-2 py-0.5 rounded-full border border-aqi-poor/30">URGENT</span>
+                    </div>
+                    <div class="grid gap-3">
+                        <!-- Action Card -->
+                        <div
+                            class="bg-surface border border-surface-accent p-4 rounded-xl flex items-start justify-between hover:border-primary/50 transition-colors group">
+                            <div class="flex gap-4">
+                                <div
+                                    class="mt-1 size-10 rounded-lg bg-background-dark flex items-center justify-center text-primary border border-surface-accent">
+                                    <span class="material-symbols-outlined">water_drop</span>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-bold text-white">Dust Suppression Protocol</h4>
+                                    <p class="text-xs text-[#9ab8bc] mt-0.5">Deploy mechanical sweepers on Inner Ring
+                                        Road immediately.</p>
+                                    <div class="flex items-center gap-3 mt-2">
+                                        <span
+                                            class="text-[10px] font-bold text-[#9ab8bc] bg-background-dark px-1.5 py-0.5 rounded border border-surface-accent uppercase">IMPACT:
+                                            -15 AQI</span>
+                                        <span class="text-[10px] font-bold text-primary">RESOURCES READY</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <button
+                                class="bg-primary text-background-dark font-black text-xs px-4 py-2 rounded-lg hover:brightness-110 shadow-[0_0_10px_rgba(0,203,230,0.3)]">
+                                EXECUTE
+                            </button>
+                        </div>
+                        <!-- Action Card -->
+                        <div
+                            class="bg-surface border border-surface-accent p-4 rounded-xl flex items-start justify-between opacity-80 hover:opacity-100 transition-all">
+                            <div class="flex gap-4">
+                                <div
+                                    class="mt-1 size-10 rounded-lg bg-background-dark flex items-center justify-center text-aqi-moderate border border-surface-accent">
+                                    <span class="material-symbols-outlined">alt_route</span>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-bold text-white">Traffic Diversion (Heavy Vehicles)</h4>
+                                    <p class="text-xs text-[#9ab8bc] mt-0.5">Re-route commercial traffic from Exit 14 to
+                                        Western Bypass.</p>
+                                    <div class="flex items-center gap-3 mt-2">
+                                        <span
+                                            class="text-[10px] font-bold text-[#9ab8bc] bg-background-dark px-1.5 py-0.5 rounded border border-surface-accent uppercase">IMPACT:
+                                            -8 AQI</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <button
+                                class="border border-primary text-primary font-black text-xs px-4 py-2 rounded-lg hover:bg-primary/10">
+                                DELEGATE
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RESOURCES TAB -->
+            <div id="content-resources"
+                class="hidden flex flex-col gap-6 p-6 animate-in fade-in slide-in-from-right-4 duration-500">
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-surface p-4 rounded-xl border border-surface-accent">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="material-symbols-outlined text-primary">local_shipping</span>
+                            <span class="text-xl font-black">12/15</span>
+                        </div>
+                        <p class="text-xs text-[#9ab8bc] font-bold uppercase">Sprinkler Trucks Active</p>
+                    </div>
+                    <div class="bg-surface p-4 rounded-xl border border-surface-accent">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="material-symbols-outlined text-accent-yellow">engineering</span>
+                            <span class="text-xl font-black">45</span>
+                        </div>
+                        <p class="text-xs text-[#9ab8bc] font-bold uppercase">Field Personnel</p>
+                    </div>
+                </div>
+
+                <div class="bg-surface border border-surface-accent rounded-xl p-6">
+                    <h3 class="font-bold text-sm text-white mb-4">Vehicle Fleet Status</h3>
+                    <table class="w-full text-left text-xs">
+                        <thead class="text-[#9ab8bc] uppercase border-b border-surface-accent">
+                            <tr>
+                                <th class="pb-2">ID</th>
+                                <th class="pb-2">Type</th>
+                                <th class="pb-2">Location</th>
+                                <th class="pb-2">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-surface-accent text-white">
+                            <tr>
+                                <td class="py-3 font-mono text-[#9ab8bc]">TRK-01</td>
+                                <td class="py-3">Anti-Smog Gun</td>
+                                <td class="py-3">Ward 42</td>
+                                <td class="py-3"><span class="text-primary font-bold">ACTIVE</span></td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 font-mono text-[#9ab8bc]">TRK-04</td>
+                                <td class="py-3">Water Sprinkler</td>
+                                <td class="py-3">Ward 19</td>
+                                <td class="py-3"><span class="text-aqi-moderate font-bold">REFUELING</span></td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 font-mono text-[#9ab8bc]">PAT-09</td>
+                                <td class="py-3">Patrol Unit</td>
+                                <td class="py-3">Ward 08</td>
+                                <td class="py-3"><span class="text-primary font-bold">PATROL</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- SLA REPORTS TAB -->
+            <div id="content-sla"
+                class="hidden flex flex-col gap-6 p-6 animate-in fade-in slide-in-from-right-4 duration-500">
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-surface p-6 rounded-xl border border-surface-accent text-center">
+                        <p class="text-xs text-[#9ab8bc] font-bold uppercase mb-2">Avg Response Time</p>
+                        <p class="text-4xl font-black text-white">1.4h</p>
+                        <p class="text-xs text-aqi-good font-bold mt-1">▲ 8% vs Last Week</p>
+                    </div>
+                    <div class="bg-surface p-6 rounded-xl border border-surface-accent text-center">
+                        <p class="text-xs text-[#9ab8bc] font-bold uppercase mb-2">Resolution Rate</p>
+                        <p class="text-4xl font-black text-white">94%</p>
+                        <p class="text-xs text-primary font-bold mt-1">Target: 90%</p>
+                    </div>
+                </div>
+
+                <div class="bg-surface border border-surface-accent rounded-xl p-6">
+                    <h3 class="font-bold text-sm text-white mb-4">SLA Breaches (Last 24h)</h3>
+                    <div class="space-y-3">
+                        <div
+                            class="flex items-center justify-between p-3 bg-background-dark rounded border border-surface-accent">
+                            <div>
+                                <p class="text-xs font-bold text-white">Ticket #4921 - Illegal Dumping</p>
+                                <p class="text-[10px] text-[#9ab8bc]">Ward 12 • Overdue by 2h</p>
+                            </div>
+                            <span
+                                class="text-[10px] font-bold bg-aqi-poor/20 text-aqi-poor px-2 py-1 rounded">CRITICAL</span>
+                        </div>
+                        <div
+                            class="flex items-center justify-between p-3 bg-background-dark rounded border border-surface-accent">
+                            <div>
+                                <p class="text-xs font-bold text-white">Ticket #4905 - Dust Complaint</p>
+                                <p class="text-[10px] text-[#9ab8bc]">Ward 04 • Overdue by 45m</p>
+                            </div>
+                            <span
+                                class="text-[10px] font-bold bg-aqi-moderate/20 text-aqi-moderate px-2 py-1 rounded">WARNING</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <!-- Urgent Alerts Bar (Floating Bottom) -->
+    <div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
+        <button id="alerts-btn" onclick="toggleAlertsPanel()"
+            class="flex items-center gap-3 px-6 py-3 bg-aqi-poor text-white rounded-full font-black text-sm shadow-[0_10px_30px_rgba(204,26,26,0.4)] animate-pulse hover:scale-105 transition-transform hidden">
+            <span class="material-symbols-outlined">warning</span>
+            <span id="alerts-text">URGENT ALERTS (3 ACTIVE BREACHES)</span>
+            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+        </button>
+    </div>
+
+    <!-- Alerts Side Panel (Slide-in) -->
+    <div id="alerts-panel" class="fixed right-0 top-0 h-full w-[400px] bg-background-dark border-l border-surface-accent z-[60] transform translate-x-full transition-transform duration-500 shadow-2xl flex flex-col">
+        <div class="p-6 border-b border-surface-accent flex justify-between items-center bg-surface">
+            <h2 class="text-xl font-black text-white flex items-center gap-3">
+                <span class="material-symbols-outlined text-accent-red">emergency</span>
+                ACTIVE BREACHES
+            </h2>
+            <button onclick="toggleAlertsPanel()" class="size-10 rounded-full hover:bg-white/10 flex items-center justify-center text-white transition-colors">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
+        <div id="breach-list" class="flex-1 overflow-y-auto p-6 space-y-4">
+            <!-- Breaches populated by JS -->
+        </div>
+        <div class="p-6 bg-surface border-t border-surface-accent">
+            <button class="w-full bg-accent-red text-white py-3 rounded-xl font-black text-sm hover:brightness-110 transition-all uppercase">Broadcast Fleet Warning</button>
+        </div>
+    </div>
+
+    <!-- Hidden PDF Report Structure -->
+    <div id="pdf-report" class="hidden bg-white text-black p-8 max-w-[800px] mx-auto">
+        <div class="flex justify-between items-center border-b-2 border-black pb-4 mb-8">
+            <div>
+                <h1 class="text-2xl font-black uppercase tracking-tight">Operational Status Report</h1>
+                <p class="text-sm text-gray-600 font-bold uppercase tracking-widest mt-1">Transport & Logistics Dept.
+                </p>
+            </div>
+            <div class="text-right">
+                <p class="text-xs font-bold text-gray-500">DATE</p>
+                <p class="text-lg font-bold" id="pdf-date">Jan 12, 2026</p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-8 mb-8">
+            <div>
+                <h3 class="font-bold uppercase text-xs text-gray-500 mb-2">Active Incidents</h3>
+                <p class="text-4xl font-black">12</p>
+            </div>
+            <div>
+                <h3 class="font-bold uppercase text-xs text-gray-500 mb-2">Resource Utilization</h3>
+                <p class="text-4xl font-black">87%</p>
+            </div>
+        </div>
+
+        <h3 class="font-bold uppercase text-sm mb-4 border-b border-gray-200 pb-2">Priority Actions Pending</h3>
+        <table class="w-full text-left text-sm mb-8">
+            <thead class="bg-gray-100 uppercase text-xs font-bold">
+                <tr>
+                    <th class="p-3">Action</th>
+                    <th class="p-3">Ward</th>
+                    <th class="p-3">Impact</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+                <tr>
+                    <td class="p-3 font-bold">Dust Suppression</td>
+                    <td class="p-3">Ward 42</td>
+                    <td class="p-3">-15 AQI</td>
+                </tr>
+                <tr>
+                    <td class="p-3 font-bold">Traffic Diversion</td>
+                    <td class="p-3">Ward 19</td>
+                    <td class="p-3">-8 AQI</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="text-center text-xs text-gray-400 uppercase font-bold mt-12 pt-4 border-t border-gray-100">
+            Generated by Ward-Wise Intelligence Platform
+        </div>
+    </div>
+
+    <script src="../authority-sync.js"></script>
+    <script>
+        // Real-time Data Sync Integration
+        let currentWards = [];
+        window.onAuthorityDataUpdate = function(wards) {
+            console.log('🚛 Updating Operational View with real-time ward data');
+            currentWards = wards;
+            
+            updateAlertsUI(wards);
+
+            // Refresh Map
+            if (map && wardGeoLayer) {
+                wardGeoLayer.setStyle((feature) => {
+                    const wardData = AuthoritySync.getWard(feature.properties.Ward_Name);
+                    const aqi = wardData ? wardData.aqi : 150;
+                    const color = AuthoritySync.getAQIColor(aqi);
+                    feature.properties.aqi = aqi;
+                    return {
+                        fillColor: color,
+                        weight: 1,
+                        opacity: 1,
+                        color: 'white',
+                        dashArray: '3',
+                        fillOpacity: 0.6
+                    };
+                });
+            }
+
+            // If a ward was already selected, update its info
+            const currentWardName = document.getElementById('selected-ward-name').innerText;
+            if (currentWardName && currentWardName !== 'Select a Ward') {
+                const ward = AuthoritySync.getWard(currentWardName);
+                if (ward) updateWardDetails(ward);
+            }
+        };
+
+        window.toggleAlertsPanel = function() {
+            const panel = document.getElementById('alerts-panel');
+            panel.classList.toggle('translate-x-full');
+        };
+
+        function updateAlertsUI(wards) {
+            const breaches = wards.filter(w => w.aqi > 200); // Lowered threshold to 200 for demo visibility
+            const alertsBtn = document.getElementById('alerts-btn');
+            const alertsText = document.getElementById('alerts-text');
+            const breachList = document.getElementById('breach-list');
+
+            // Ensure button is visible
+            alertsBtn.classList.remove('hidden');
+
+            if (breaches.length > 0) {
+                // BREACH STATE
+                alertsBtn.classList.remove('bg-emerald-600', 'shadow-[0_10px_30px_rgba(5,150,105,0.4)]');
+                alertsBtn.classList.add('bg-aqi-poor', 'shadow-[0_10px_30px_rgba(204,26,26,0.4)]', 'animate-pulse');
+                alertsText.innerText = `URGENT ALERTS (${breaches.length} ACTIVE BREACHES)`;
+                
+                breachList.innerHTML = breaches.map(b => `
+                    <div class="bg-surface-accent/20 border-l-4 border-accent-red p-5 rounded-r-xl cursor-pointer hover:bg-surface-accent/40 transition-all group" onclick="focusOnMap('${b.name}'); toggleAlertsPanel();">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="font-black text-white group-hover:text-accent-red transition-colors">${b.name}</h4>
+                            <span class="text-xs bg-accent-red text-white px-2 py-0.5 rounded font-bold">${b.aqi} AQI</span>
+                        </div>
+                        <p class="text-[10px] text-[#9ab8bc] uppercase font-bold mb-3">Status: ${b.status} • Violation Detected</p>
+                        <div class="flex gap-2">
+                            <button onclick="executeAction(this, 'Sprinklers')" class="bg-white/5 hover:bg-white/20 text-white text-[10px] px-3 py-1.5 rounded font-black border border-white/10 uppercase">Deploy Sprinklers</button>
+                            <button onclick="executeAction(this, 'Traffic Ban')" class="bg-white/5 hover:bg-white/20 text-white text-[10px] px-3 py-1.5 rounded font-black border border-white/10 uppercase">Restrict Traffic</button>
+                        </div>
+                    </div>
+                `).join('');
+            } else {
+                // NORMAL STATE
+                alertsBtn.classList.remove('bg-aqi-poor', 'shadow-[0_10px_30px_rgba(204,26,26,0.4)]', 'animate-pulse');
+                alertsBtn.classList.add('bg-emerald-600', 'shadow-[0_10px_30px_rgba(5,150,105,0.4)]');
+                alertsText.innerText = `SYSTEM NORMAL (0 ACTIVE BREACHES)`;
+                
+                breachList.innerHTML = `
+                    <div class="h-full flex flex-col items-center justify-center text-center opacity-40 py-20">
+                        <span class="material-symbols-outlined text-6xl mb-4">check_circle</span>
+                        <h3 class="font-black text-white">ALL SECTORS SECURE</h3>
+                        <p class="text-xs text-[#9ab8bc] mt-2">No active violations detected in any ward.</p>
+                    </div>
+                `;
+            }
+        }
+
+        window.focusOnMap = function(wardName) {
+            if (!map || !wardGeoLayer) return;
+            wardGeoLayer.eachLayer(layer => {
+                const name = layer.feature.properties.Ward_Name || layer.feature.properties.name;
+                if (name && (name.toUpperCase().includes(wardName.toUpperCase()) || wardName.toUpperCase().includes(name.toUpperCase()))) {
+                    map.fitBounds(layer.getBounds(), { padding: [50, 50], maxZoom: 14 });
+                    layer.setStyle({ weight: 6, color: '#ff4444' });
+                    setTimeout(() => layer.setStyle({ weight: 1, color: 'white' }), 2000);
+                    const ward = currentWards.find(w => w.name === wardName);
+                    if (ward) updateWardDetails(ward);
+                }
+            });
+        };
+
+        // Action Execution Logic
+        window.executeAction = function(btn, actionName) {
+            const originalText = btn.innerText;
+            btn.disabled = true;
+            btn.innerText = 'EXECUTING...';
+            btn.classList.add('bg-white/20', 'cursor-not-allowed');
+            btn.classList.remove('bg-primary', 'text-background-dark');
+            btn.classList.add('text-white');
+
+            // Find current ward name
+            const wardName = document.getElementById('selected-ward-name').innerText;
+            
+            // Show toast
+            showToast(`Protocol "${actionName}" initiated for ${wardName}. Units dispatched.`);
+
+            setTimeout(() => {
+                btn.innerText = 'ACTIVE';
+                btn.classList.add('bg-accent-green/20', 'text-accent-green', 'border', 'border-accent-green/50');
+                btn.classList.remove('bg-white/20');
+                
+                // Simulate an impact update (e.g., lower AQI slightly in view)
+                const aqiEl = document.getElementById('selected-ward-aqi');
+                const currentAqi = parseInt(aqiEl.innerText);
+                if (!isNaN(currentAqi)) {
+                    const newAqi = Math.max(0, currentAqi - 15);
+                    aqiEl.innerText = newAqi;
+                    aqiEl.classList.add('text-accent-green');
+                    setTimeout(() => aqiEl.classList.remove('text-accent-green'), 2000);
+                }
+            }, 1500);
+        };
+
+        function showToast(message) {
+            let toast = document.getElementById('sync-toast');
+            if (!toast) {
+                toast = document.createElement('div');
+                toast.id = 'sync-toast';
+                toast.className = 'fixed bottom-8 right-8 bg-surface-dark border border-primary/30 text-white px-6 py-4 rounded-xl shadow-2xl flex items-center gap-4 transform translate-y-24 transition-transform duration-500 z-[1000]';
+                document.body.appendChild(toast);
+            }
+            toast.innerHTML = `<span class="material-symbols-outlined text-primary">check_circle</span> <span>${message}</span>`;
+            toast.classList.remove('translate-y-24');
+            setTimeout(() => toast.classList.add('translate-y-24'), 4000);
+        }
+
+        function updateWardDetails(ward) {
+            document.getElementById('selected-ward-name').innerText = ward.name;
+            document.getElementById('selected-ward-aqi').innerText = ward.aqi;
+            
+            // Update Source Attribution
+            const sourceBars = document.querySelectorAll('.h-full.rounded-full[style^="width"]');
+            if (sourceBars[0]) {
+                sourceBars[0].style.width = ward.sourceDistribution.vehicular + '%';
+                sourceBars[0].parentElement.previousElementSibling.querySelector('.text-white').innerText = ward.sourceDistribution.vehicular + '%';
+            }
+            if (sourceBars[1]) {
+                sourceBars[1].style.width = ward.sourceDistribution.construction + '%';
+                sourceBars[1].parentElement.previousElementSibling.querySelector('.text-white').innerText = ward.sourceDistribution.construction + '%';
+            }
+            if (sourceBars[2]) {
+                sourceBars[2].style.width = ward.sourceDistribution.industrial + '%';
+                sourceBars[2].parentElement.previousElementSibling.querySelector('.text-white').innerText = ward.sourceDistribution.industrial + '%';
+            }
+
+            // Update Recommendations
+            const recContainer = document.querySelector('.grid.gap-3');
+            if (recContainer && ward.recommendedActions) {
+                recContainer.innerHTML = ward.recommendedActions.map(action => `
+                    <div class="bg-surface border border-surface-accent p-4 rounded-xl flex items-start justify-between hover:border-primary/50 transition-colors group">
+                        <div class="flex gap-4">
+                            <div class="mt-1 size-10 rounded-lg bg-background-dark flex items-center justify-center text-primary border border-surface-accent">
+                                <span class="material-symbols-outlined">bolt</span>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-white">${action}</h4>
+                                <p class="text-xs text-[#9ab8bc] mt-0.5">Automated recommendation based on ${ward.name} metrics.</p>
+                            </div>
+                        </div>
+                        <button onclick="executeAction(this, '${action}')" class="bg-primary text-background-dark font-black text-xs px-4 py-2 rounded-lg hover:brightness-110 active:scale-95 transition-all">EXECUTE</button>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // Map Initialization
+        let map;
+        let wardGeoLayer;
+        document.addEventListener('DOMContentLoaded', () => {
+            map = L.map('map-container', {
+                zoomControl: false,
+                attributionControl: false
+            }).setView([28.6139, 77.2090], 11);
+
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+                maxZoom: 19
+            }).addTo(map);
+
+            // Fetch and Render GeoJSON
+            fetch('/delhi_wards.geojson')
+                .then(response => response.json())
+                .then(data => {
+                    wardGeoLayer = L.geoJSON(data, {
+                        style: (feature) => {
+                            const wardData = AuthoritySync.getWard(feature.properties.Ward_Name);
+                            const aqi = wardData ? wardData.aqi : 150;
+                            const color = AuthoritySync.getAQIColor(aqi);
+                            feature.properties.aqi = aqi;
+
+                            return {
+                                fillColor: color,
+                                weight: 1,
+                                opacity: 1,
+                                color: 'white',
+                                dashArray: '3',
+                                fillOpacity: 0.6
+                            };
+                        },
+                        onEachFeature: (feature, layer) => {
+                            layer.on('mouseover', function (e) {
+                                var layer = e.target;
+                                layer.setStyle({
+                                    weight: 3,
+                                    color: '#666',
+                                    dashArray: '',
+                                    fillOpacity: 0.8
+                                });
+                                layer.bringToFront();
+
+                                // Show Tooltip
+                                const tooltip = document.getElementById('map-tooltip');
+                                const tooltipName = document.getElementById('tooltip-name');
+                                const tooltipAqi = document.getElementById('tooltip-aqi');
+
+                                tooltipName.innerText = feature.properties.Ward_Name || feature.properties.name || 'Unknown Ward';
+                                tooltipAqi.innerText = feature.properties.aqi || '--';
+                                tooltip.classList.remove('hidden');
+                            });
+
+                            layer.on('mousemove', function (e) {
+                                const tooltip = document.getElementById('map-tooltip');
+                                tooltip.style.left = (e.originalEvent.clientX + 15) + 'px';
+                                tooltip.style.top = (e.originalEvent.clientY + 15) + 'px';
+                            });
+
+                            layer.on('mouseout', function (e) {
+                                e.target.setStyle({
+                                    weight: 1,
+                                    color: 'white',
+                                    dashArray: '3',
+                                    fillOpacity: 0.6
+                                });
+                                document.getElementById('map-tooltip').classList.add('hidden');
+                            });
+
+                            layer.on('click', function (e) {
+                                map.fitBounds(e.target.getBounds());
+                                const ward = AuthoritySync.getWard(feature.properties.Ward_Name);
+                                if (ward) updateWardDetails(ward);
+                            });
+                        }
+                    }).addTo(map);
+                })
+                .catch(err => console.error('Error loading GeoJSON:', err));
+        });
+
+        // Tab Switching
+        function switchTab(tabId) {
+            ['live', 'resources', 'sla'].forEach(id => {
+                const btn = document.getElementById('tab-' + id);
+                const content = document.getElementById('content-' + id);
+
+                if (id === tabId) {
+                    btn.classList.remove('tab-inactive');
+                    btn.classList.add('tab-active');
+                    content.classList.remove('hidden');
+                } else {
+                    btn.classList.add('tab-inactive');
+                    btn.classList.remove('tab-active');
+                    content.classList.add('hidden');
+                }
+            });
+        }
+
+        // PDF Export
+        function exportPDF() {
+            const element = document.getElementById('pdf-report');
+            const dateEl = document.getElementById('pdf-date');
+            dateEl.innerText = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+
+            element.classList.remove('hidden');
+
+            const opt = {
+                margin: 10,
+                filename: 'operational_report.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            html2pdf().set(opt).from(element).save().then(() => {
+                element.classList.add('hidden');
+            });
+        }
+    </script>
+</body>
+
+</html>
