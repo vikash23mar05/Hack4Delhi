@@ -1,16 +1,18 @@
 
-import { getNearestAQI, AQIDataPoint } from './openaqService';
+import { getNearestAQI, fetchDelhiAirQuality, AQIDataPoint } from './openaqService';
 import { fetchDelhiDataGovAQI } from './dataGovService';
 import { WardData } from '../types';
 import { supabase } from './supabaseClient';
+import { getPolygonCentroid, isPointInPolygon, getAQICategory } from './aqiMapService';
 
 export interface WardEstimationOptions {
   forceRefresh?: boolean;
 }
 
 export async function getAllDelhiWards(): Promise<WardData[]> {
-  // 0. Primary Source: SUPABASE
+  // 0. Primary Source: WAQI / OpenAQ (Bypassing Supabase to ensure accurate live maps)
   try {
+    /* 
     const { data: supabaseWards, error } = await supabase
       .from('ward_aqi')
       .select('*');
@@ -87,6 +89,7 @@ export async function getAllDelhiWards(): Promise<WardData[]> {
       wards.sort((a, b) => b.priorityScore - a.priorityScore);
       return wards;
     }
+    */
   } catch (err) {
     console.warn('Supabase fetch failed or table not ready, falling back to local processing.', err);
   }
@@ -115,9 +118,9 @@ export async function getAllDelhiWards(): Promise<WardData[]> {
   const geojson = await geoResponse.json();
   const features = geojson.features || [];
 
-  // 2. Fetch live station data
-  const stations = await fetchDelhiDataGovAQI();
-  console.log(`📡 Fetched ${stations.length} stations from data.gov.in`);
+  // 2. Fetch live station data using accurate WAQI / OpenAQ
+  const stations = await fetchDelhiAirQuality();
+  console.log(`📡 Fetched ${stations.length} stations from WAQI OpenAQ`);
 
   // 3. For each ward, calculate AQI and other metrics
   const wards: WardData[] = features.map((feature: any, index: number) => {
@@ -129,14 +132,11 @@ export async function getAllDelhiWards(): Promise<WardData[]> {
     let lat = 28.6139;
     let lng = 77.2090;
     
-    if (feature.geometry) {
-      const coords = feature.geometry.coordinates;
-      if (feature.geometry.type === 'Polygon' && coords[0] && coords[0][0]) {
-        lng = coords[0][0][0];
-        lat = coords[0][0][1];
-      } else if (feature.geometry.type === 'MultiPolygon' && coords[0] && coords[0][0] && coords[0][0][0]) {
-        lng = coords[0][0][0][0];
-        lat = coords[0][0][0][1];
+    if (feature.geometry?.coordinates) {
+      const centroid = getPolygonCentroid(feature.geometry.coordinates);
+      if (centroid) {
+        lat = centroid.lat;
+        lng = centroid.lng;
       }
     }
 
@@ -144,12 +144,13 @@ export async function getAllDelhiWards(): Promise<WardData[]> {
     const aqiResult = getNearestAQI(lat, lng, stations);
     const aqi = aqiResult.aqi;
     
-    // Derive status
+    // Derive status labels that match internal UI enums but follow landing map color bands
+    const category = getAQICategory(aqi);
     let status: WardData['status'] = 'MODERATE';
-    if (aqi <= 50) status = 'GOOD';
-    else if (aqi <= 100) status = 'MODERATE';
-    else if (aqi <= 200) status = 'POOR';
-    else if (aqi <= 300) status = 'SEVERE';
+    if (category.label === 'Good') status = 'GOOD';
+    else if (category.label === 'Satisfactory') status = 'MODERATE';
+    else if (category.label === 'Moderately Polluted') status = 'POOR';
+    else if (category.label === 'Poor') status = 'SEVERE';
     else status = 'CRITICAL';
 
     // Derive priority score (AQI + some randomness for demo variance)

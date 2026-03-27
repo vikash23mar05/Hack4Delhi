@@ -1,15 +1,16 @@
 
 import React, { useState } from 'react';
 import LeafletAQIMap from './LeafletAQIMap';
-import { DELHI_WARDS } from '../constants';
 import { WardData } from '../types';
 import { EnrichedWardGeoJSON } from '../services/aqiMapService';
+import { useWardData } from '../contexts/WardDataContext';
 
 interface InteractiveMapProps {
   onBack: () => void;
 }
 
 const InteractiveMap: React.FC<InteractiveMapProps> = ({ onBack }) => {
+  const { wards } = useWardData();
   const [selectedWard, setSelectedWard] = useState<EnrichedWardGeoJSON | null>(null);
 
   const handleWardSelect = (ward: EnrichedWardGeoJSON) => {
@@ -20,7 +21,7 @@ const InteractiveMap: React.FC<InteractiveMapProps> = ({ onBack }) => {
     <div className="fixed inset-0 z-[100] bg-background-dark flex overflow-hidden font-display">
       <div className="flex-1 relative bg-[#0a0f0f]">
         {/* Leaflet Map Component */}
-        <LeafletAQIMap onWardSelect={handleWardSelect} onBack={onBack} autoRefreshInterval={5 * 60 * 1000} />
+        <LeafletAQIMap onWardSelect={handleWardSelect} onBack={onBack} wardData={wards} autoRefreshInterval={5 * 60 * 1000} />
 
         {/* Floating UI Overlays */}
         <div className="absolute top-8 left-8 flex items-center gap-4 z-10 pointer-events-none">

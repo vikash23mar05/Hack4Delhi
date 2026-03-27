@@ -53,7 +53,7 @@ export function getAQICategory(aqi: number): AQICategory {
 /**
  * Calculate centroid of a polygon geometry
  */
-function getPolygonCentroid(coordinates: any[]): { lat: number; lng: number } | null {
+export function getPolygonCentroid(coordinates: any[]): { lat: number; lng: number } | null {
   try {
     const ring = coordinates[0];
     if (!ring || ring.length === 0) return null;
@@ -85,7 +85,7 @@ function getPolygonCentroid(coordinates: any[]): { lat: number; lng: number } | 
 /**
  * Point-in-polygon check using ray casting algorithm
  */
-function isPointInPolygon(lng: number, lat: number, coordinates: any[]): boolean {
+export function isPointInPolygon(lng: number, lat: number, coordinates: any[]): boolean {
   try {
     // Handles Polygon and MultiPolygon GeoJSON structures
     const polygons = Array.isArray(coordinates?.[0]?.[0]?.[0])

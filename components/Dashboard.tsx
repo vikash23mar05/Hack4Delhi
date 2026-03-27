@@ -3,13 +3,17 @@ import React, { useState, useEffect } from 'react';
 import { DELHI_WARDS } from '../constants';
 import { WardData, SimulationResult } from '../types';
 import { getPolicySimulation, getGeneralInsight } from '../services/geminiService';
+import { useWardData } from '../contexts/WardDataContext';
 
 interface DashboardProps {
   initialPolicy?: string;
 }
 
 const Dashboard: React.FC<DashboardProps> = ({ initialPolicy }) => {
-  const [selectedWard, setSelectedWard] = useState<WardData>(DELHI_WARDS[0]);
+  const { wards } = useWardData();
+  const displayWards = wards.length > 0 ? wards : DELHI_WARDS;
+  
+  const [selectedWard, setSelectedWard] = useState<WardData>(displayWards[0]);
   const [policyInput, setPolicyInput] = useState(initialPolicy || '');
 
   useEffect(() => {
@@ -53,10 +57,10 @@ const Dashboard: React.FC<DashboardProps> = ({ initialPolicy }) => {
         <div className="flex gap-4">
           <select 
             value={selectedWard.id}
-            onChange={(e) => setSelectedWard(DELHI_WARDS.find(w => w.id === e.target.value) || DELHI_WARDS[0])}
+            onChange={(e) => setSelectedWard(displayWards.find(w => w.id === e.target.value) || displayWards[0])}
             className="bg-background-dark/50 border border-white/10 rounded-2xl px-6 py-3 text-xs font-black focus:border-primary focus:ring-1 focus:ring-primary outline-none uppercase tracking-widest shadow-2xl"
           >
-            {DELHI_WARDS.map(w => (
+            {displayWards.map(w => (
               <option key={w.id} value={w.id}>{w.name} Jurisdiction</option>
             ))}
           </select>

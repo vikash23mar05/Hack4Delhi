@@ -80,7 +80,11 @@ def update_ward_predictions():
         props = feature['properties']
         # Try different possible ward name fields
         ward_name = props.get('Ward_Name') or props.get('WARD_NAME') or props.get('name') or props.get('Ward_No', 'Unknown')
+        ward_name = str(ward_name).strip() if ward_name else None
         
+        if not ward_name:
+            print(f"⚠️ Skipping invalid ward mapping")
+            continue
         # Get coordinate for distance calculation
         geom = feature['geometry']
         if geom['type'] == 'Polygon':
@@ -103,11 +107,14 @@ def update_ward_predictions():
 
         predicted_aqi = weighted_aqi_sum / total_weight if total_weight > 0 else 150
 
-        ward_results[ward_name.upper()] = {
-            "aqi": round(predicted_aqi),
-            "status": "SEVERE" if predicted_aqi > 300 else "POOR" if predicted_aqi > 200 else "MODERATE",
-            "lastUpdated": datetime.now().strftime("%Y-%m-%d %H:%M")
-        }
+        try:
+            ward_results[ward_name.upper()] = {
+                "aqi": round(predicted_aqi),
+                "status": "SEVERE" if predicted_aqi > 300 else "POOR" if predicted_aqi > 200 else "MODERATE",
+                "lastUpdated": datetime.now().strftime("%Y-%m-%d %H:%M")
+            }
+        except Exception as e:
+            print(f"❌ Error processing ward: {ward_name}, error: {e}")
 
     # Save to JSON
     with open(OUTPUT_PATH, 'w') as f:
