@@ -26,11 +26,13 @@ export const DELHI_WARDS: WardData[] = [
       'Coordinate with ISBT for vehicle staging area relocation'
     ],
     trendHistory: [
-      { timestamp: '6 AM', aqi: 380 },
-      { timestamp: '9 AM', aqi: 402 },
-      { timestamp: '12 PM', aqi: 412 },
-      { timestamp: '3 PM', aqi: 408 }
-    ]
+      { timestamp: '12 AM', aqi: 310 }, { timestamp: '3 AM', aqi: 295 },
+      { timestamp: '6 AM', aqi: 380 }, { timestamp: '9 AM', aqi: 402 },
+      { timestamp: '12 PM', aqi: 412 }, { timestamp: '3 PM', aqi: 408 },
+      { timestamp: '6 PM', aqi: 425 }, { timestamp: '9 PM', aqi: 405 },
+    ],
+    weather: { windSpeed: 4, windDirection: 'SE', humidity: 68, temperature: 28, inversionLayer: true },
+    priorityBreakdown: { aqiWeight: 55, populationWeight: 30, complaintsWeight: 15 },
   },
   {
     id: 'w08',
@@ -55,11 +57,13 @@ export const DELHI_WARDS: WardData[] = [
       'Schedule dust control on alternate Sundays'
     ],
     trendHistory: [
-      { timestamp: '6 AM', aqi: 280 },
-      { timestamp: '9 AM', aqi: 295 },
-      { timestamp: '12 PM', aqi: 308 },
-      { timestamp: '3 PM', aqi: 302 }
-    ]
+      { timestamp: '12 AM', aqi: 240 }, { timestamp: '3 AM', aqi: 225 },
+      { timestamp: '6 AM', aqi: 280 }, { timestamp: '9 AM', aqi: 295 },
+      { timestamp: '12 PM', aqi: 308 }, { timestamp: '3 PM', aqi: 302 },
+      { timestamp: '6 PM', aqi: 315 }, { timestamp: '9 PM', aqi: 298 },
+    ],
+    weather: { windSpeed: 8, windDirection: 'W', humidity: 55, temperature: 30, inversionLayer: false },
+    priorityBreakdown: { aqiWeight: 45, populationWeight: 25, complaintsWeight: 30 },
   },
   {
     id: 'w15',
@@ -85,11 +89,13 @@ export const DELHI_WARDS: WardData[] = [
       'Initiate compliance audit with DPCC'
     ],
     trendHistory: [
-      { timestamp: '6 AM', aqi: 330 },
-      { timestamp: '9 AM', aqi: 348 },
-      { timestamp: '12 PM', aqi: 356 },
-      { timestamp: '3 PM', aqi: 352 }
-    ]
+      { timestamp: '12 AM', aqi: 290 }, { timestamp: '3 AM', aqi: 278 },
+      { timestamp: '6 AM', aqi: 330 }, { timestamp: '9 AM', aqi: 348 },
+      { timestamp: '12 PM', aqi: 356 }, { timestamp: '3 PM', aqi: 352 },
+      { timestamp: '6 PM', aqi: 370 }, { timestamp: '9 PM', aqi: 358 },
+    ],
+    weather: { windSpeed: 3, windDirection: 'N', humidity: 72, temperature: 27, inversionLayer: true },
+    priorityBreakdown: { aqiWeight: 50, populationWeight: 20, complaintsWeight: 30 },
   },
   {
     id: 'w12',
@@ -113,47 +119,76 @@ export const DELHI_WARDS: WardData[] = [
       'Maintain traffic flow management'
     ],
     trendHistory: [
-      { timestamp: '6 AM', aqi: 125 },
-      { timestamp: '9 AM', aqi: 135 },
-      { timestamp: '12 PM', aqi: 142 },
-      { timestamp: '3 PM', aqi: 138 }
-    ]
+      { timestamp: '12 AM', aqi: 110 }, { timestamp: '3 AM', aqi: 105 },
+      { timestamp: '6 AM', aqi: 125 }, { timestamp: '9 AM', aqi: 135 },
+      { timestamp: '12 PM', aqi: 142 }, { timestamp: '3 PM', aqi: 138 },
+      { timestamp: '6 PM', aqi: 145 }, { timestamp: '9 PM', aqi: 132 },
+    ],
+    weather: { windSpeed: 12, windDirection: 'NW', humidity: 45, temperature: 31, inversionLayer: false },
+    priorityBreakdown: { aqiWeight: 40, populationWeight: 35, complaintsWeight: 25 },
   }
 ];
 
 export const MOCK_COMPLAINTS: Complaint[] = [
   {
-    id: 'c1',
+    id: 'CMP-2026-0441',
     type: 'Waste Burning',
     ward: 'ANAND VIHAR',
-    location: 'Backyard of ISBT',
-    timestamp: '11:20 AM',
+    location: 'Backyard of ISBT, Gate 3',
+    timestamp: '2026-03-27T10:30:00',
     status: 'Assigned',
     intensity: 'High',
     responsibleDept: 'Fire & Sanitation (MCD)',
-    slaRemaining: '0.8h'
+    slaRemaining: '0.8h',
+    reporter: {
+      userId: 'U-9A1F3B',
+      authMethod: 'Phone Verified + Google',
+      trustScore: 0.91,
+    },
+    coordinates: { lat: 28.6467, lng: 77.3152 },
+    evidence: ['img_20260327_103011.jpg', 'img_20260327_103045.jpg'],
+    aqiAtSubmission: 387,
+    integrityHash: 'sha256:3e7a9f1b2d4c8a0e6f5d3b1a9c7e2f4b8d0c6a2e4f8b0d2c6a8e0f2b4d6c8a0',
   },
   {
-    id: 'c2',
+    id: 'CMP-2026-0398',
     type: 'Construction Dust',
     ward: 'DWARKA SEC-8',
-    location: 'Metro Pillar 142',
-    timestamp: '09:45 AM',
+    location: 'Metro Pillar 142, Sector 8',
+    timestamp: '2026-03-27T09:45:00',
     status: 'Reported',
     intensity: 'Medium',
     responsibleDept: 'MCD Dust Squad',
-    slaRemaining: '24h'
+    slaRemaining: '22h',
+    reporter: {
+      userId: 'U-4D8E2C',
+      authMethod: 'Aadhaar OTP',
+      trustScore: 0.78,
+    },
+    coordinates: { lat: 28.5921, lng: 77.0672 },
+    evidence: ['construction_dust_evidence.jpg'],
+    aqiAtSubmission: 312,
+    integrityHash: 'sha256:abc123xyz9f1b2d4c8a0e6f5d3b1a9c7e2f4b8d0c6a2e4f8b0d2c6a8e0f2b4d6',
   },
   {
-    id: 'c3',
+    id: 'CMP-2026-0312',
     type: 'Industrial Violation',
     ward: 'OKHLA PHASE III',
-    location: 'Plot 418 Zone B',
-    timestamp: 'Yesterday',
+    location: 'Plot 418, Zone B, Okhla Industrial Area',
+    timestamp: '2026-03-26T14:15:00',
     status: 'Resolved',
     intensity: 'High',
     responsibleDept: 'DPCC Taskforce',
-    slaRemaining: 'Resolved'
+    slaRemaining: 'Resolved',
+    reporter: {
+      userId: 'U-7C5A1D',
+      authMethod: 'Phone Verified + Google',
+      trustScore: 0.95,
+    },
+    coordinates: { lat: 28.5355, lng: 77.2747 },
+    evidence: ['chimney_violation_1.jpg', 'chimney_violation_2.jpg', 'stack_reading.jpg'],
+    aqiAtSubmission: 445,
+    integrityHash: 'sha256:f8e2b4d6c0a8e2b4d6c0a8f2b4d6c0a8e2b4d6c0a8f2b4d6c0a8e2b4d6c0a8',
   },
 ];
 

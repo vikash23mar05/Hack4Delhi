@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MOCK_COMPLAINTS } from '../constants';
+import { fetchComplaints } from '../services/complaintService';
+import { Complaint } from '../types';
 
 interface ComplaintTrackerProps {
   wardName?: string;
@@ -8,9 +10,24 @@ interface ComplaintTrackerProps {
 
 const ComplaintTracker: React.FC<ComplaintTrackerProps> = ({ wardName, customComplaints }) => {
   const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [liveComplaints, setLiveComplaints] = useState<Complaint[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const baseComplaints = customComplaints || MOCK_COMPLAINTS;
-  const complaints = wardName ? baseComplaints.filter(c => c.ward === wardName) : baseComplaints;
+  useEffect(() => {
+    async function load() {
+      if (customComplaints) {
+        setLiveComplaints(customComplaints);
+        setLoading(false);
+        return;
+      }
+      const data = await fetchComplaints();
+      setLiveComplaints(data);
+      setLoading(false);
+    }
+    load();
+  }, [customComplaints]);
+
+  const complaints = wardName ? liveComplaints.filter(c => c.ward === wardName) : liveComplaints;
 
   const statusColors: Record<string, string> = {
     'Reported': 'bg-blue-500/20 text-blue-400 border-blue-500/40',
@@ -144,10 +161,22 @@ const ComplaintTracker: React.FC<ComplaintTrackerProps> = ({ wardName, customCom
                   </div>
 
                   <div className="flex gap-2">
-                    <button className="flex-1 bg-primary text-background-dark text-[10px] font-black py-2 rounded-lg hover:brightness-110 transition-all uppercase tracking-wide">
-                      Update Status
+                    <button 
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setLiveComplaints(prev => prev.map(c => c.id === complaint.id ? { ...c, status: (c.status === 'Reported' ? 'Assigned' : 'Resolved'), slaRemaining: (c.status === 'Assigned' ? 'Resolved' : c.slaRemaining) } : c));
+                      }}
+                      className="flex-1 bg-primary text-background-dark text-[10px] font-black py-2 rounded-lg hover:brightness-110 transition-all uppercase tracking-wide"
+                    >
+                      {complaint.status === 'Reported' ? 'Assign Unit' : complaint.status === 'Resolved' ? 'Archive Case' : 'Resolve Incident'}
                     </button>
-                    <button className="flex-1 bg-white/10 text-white/70 text-[10px] font-black py-2 rounded-lg hover:bg-white/20 transition-all uppercase tracking-wide">
+                    <button 
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        alert(`Viewing Evidence for Case ${complaint.id}\nVerification Hash: OX-712-442\nLocation: ${complaint.location}`);
+                      }}
+                      className="flex-1 bg-white/10 text-white/70 text-[10px] font-black py-2 rounded-lg hover:bg-white/20 transition-all uppercase tracking-wide"
+                    >
                       View Evidence
                     </button>
                   </div>

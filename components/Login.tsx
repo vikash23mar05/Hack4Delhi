@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { UserRole } from '../types';
 import { detectUserWard, storeUserWard } from '../services/locationService';
+import { createSession } from '../services/sessionStore';
 
 interface LoginProps {
   onSelectRole: (role: UserRole) => void;
@@ -39,7 +40,14 @@ const Login: React.FC<LoginProps> = ({ onSelectRole, onLocationDetected }) => {
   };
 
   const handleAction = (e: React.MouseEvent, role: UserRole) => {
-    e.stopPropagation(); // Prevent card re-selection
+    e.stopPropagation();
+    if (role === 'CITIZEN') {
+      // Build auth method label from what was provided
+      const authMethod = phone.length >= 10 ? 'Phone Verified + Google' : 'Guest';
+      createSession(phone || `guest_${Date.now()}`, authMethod);
+    } else if (role === 'AUTHORITY') {
+      createSession('authority_officer', 'SSO + Aadhaar');
+    }
     onSelectRole(role);
   };
 

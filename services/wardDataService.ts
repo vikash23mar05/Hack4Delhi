@@ -2,12 +2,96 @@
 import { getNearestAQI, AQIDataPoint } from './openaqService';
 import { fetchDelhiDataGovAQI } from './dataGovService';
 import { WardData } from '../types';
+import { supabase } from './supabaseClient';
 
 export interface WardEstimationOptions {
   forceRefresh?: boolean;
 }
 
 export async function getAllDelhiWards(): Promise<WardData[]> {
+  // 0. Primary Source: SUPABASE
+  try {
+    const { data: supabaseWards, error } = await supabase
+      .from('ward_aqi')
+      .select('*');
+
+    if (!error && supabaseWards && supabaseWards.length > 0) {
+      console.log('🌐 Using live ward data from Supabase');
+      // Map Supabase fields to the WardData interface if they differ slightly
+      // The Python script upserts: ward_name, aqi, status, last_updated
+      // We will enhance the response with our local logic for missing fields
+      
+      // But for a better experience, we should probably fetch the GeoJSON base and merge
+      const geoResponse = await fetch('/delhi_wards.geojson');
+      const geojson = await geoResponse.json();
+      const features = geojson.features || [];
+
+      const wards: WardData[] = features.map((feature: any, index: number) => {
+        const props = feature.properties || {};
+        const wardName = (props.Ward_Name || props.name || props.Ward || `Ward ${index}`).toUpperCase();
+        const wardId = props.Ward_No || props.id || `w${index}`;
+        
+        // Find corresponding record in Supabase
+        const dbRecord = supabaseWards.find(r => r.ward_name === wardName);
+        
+        // Calculate centroid or use first coordinate
+        let lat = 28.6139;
+        let lng = 77.2090;
+        
+        if (feature.geometry) {
+          const coords = feature.geometry.coordinates;
+          if (feature.geometry.type === 'Polygon' && coords[0] && coords[0][0]) {
+            lng = coords[0][0][0];
+            lat = coords[0][0][1];
+          } else if (feature.geometry.type === 'MultiPolygon' && coords[0] && coords[0][0] && coords[0][0][0]) {
+            lng = coords[0][0][0][0];
+            lat = coords[0][0][0][1];
+          }
+        }
+
+        const aqi = dbRecord ? dbRecord.aqi : 150;
+        const status = dbRecord ? dbRecord.status : 'MODERATE';
+
+        // Derive priority score
+        const priorityScore = Math.min(100, Math.round((aqi / 500) * 100 + (Math.random() * 20)));
+
+        return {
+          id: wardId,
+          name: wardName,
+          aqi,
+          status,
+          priorityScore,
+          populationDensity: Math.random() > 0.6 ? 'High' : Math.random() > 0.3 ? 'Medium' : 'Low',
+          sourceDistribution: {
+            industrial: wardName.includes('OKHLA') ? 60 : 15,
+            vehicular: 45,
+            construction: 15,
+            biomass: 25
+          },
+          complaints: Math.floor(aqi / 10 + Math.random() * 5),
+          responseTime: (1 + Math.random() * 4).toFixed(1) + 'h',
+          outcomeTrend: Math.random() > 0.7 ? 'Worsening' : 'Stable',
+          sensorCoverage: dbRecord ? 95 : 20,
+          dataConfidence: dbRecord ? 'High' : 'Medium',
+          dataSource: dbRecord ? 'sensor' : 'estimated',
+          lastUpdated: dbRecord ? 'Supabase Live' : 'Just now',
+          aqiDuration: Math.floor(Math.random() * 12 + 2) + ' hours',
+          recommendedActions: getRecommendedActions(aqi, status, wardName),
+          whyToday: getWhyToday(aqi, status, wardName),
+          trendHistory: generateTrendHistory(aqi),
+          lat,
+          lng
+        };
+      });
+
+      wards.sort((a, b) => b.priorityScore - a.priorityScore);
+      return wards;
+    }
+  } catch (err) {
+    console.warn('Supabase fetch failed or table not ready, falling back to local processing.', err);
+  }
+
+  // Fallback to existing logic
   // Check if we have cached data in localStorage
   const cached = localStorage.getItem('delhi_ward_data');
   if (cached) {

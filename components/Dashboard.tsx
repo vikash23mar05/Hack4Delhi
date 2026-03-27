@@ -4,9 +4,20 @@ import { DELHI_WARDS } from '../constants';
 import { WardData, SimulationResult } from '../types';
 import { getPolicySimulation, getGeneralInsight } from '../services/geminiService';
 
-const Dashboard: React.FC = () => {
+interface DashboardProps {
+  initialPolicy?: string;
+}
+
+const Dashboard: React.FC<DashboardProps> = ({ initialPolicy }) => {
   const [selectedWard, setSelectedWard] = useState<WardData>(DELHI_WARDS[0]);
-  const [policyInput, setPolicyInput] = useState('');
+  const [policyInput, setPolicyInput] = useState(initialPolicy || '');
+
+  useEffect(() => {
+    if (initialPolicy) {
+      setPolicyInput(initialPolicy);
+    }
+  }, [initialPolicy]);
+
   const [simulation, setSimulation] = useState<SimulationResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [insight, setInsight] = useState('');

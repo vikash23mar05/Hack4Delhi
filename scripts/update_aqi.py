@@ -113,6 +113,34 @@ def update_ward_predictions():
     with open(OUTPUT_PATH, 'w') as f:
         json.dump(ward_results, f, indent=2)
     
+    # NEW: SUPABASE INTEGRATION
+    SUPABASE_URL = os.environ.get("SUPABASE_URL")
+    SUPABASE_KEY = os.environ.get("SUPABASE_SERVICE_ROLE_KEY")
+
+    if SUPABASE_URL and SUPABASE_KEY:
+        try:
+            from supabase import create_client, Client
+            supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
+            
+            # Convert results to a list for Supabase upsert
+            supabase_records = []
+            for ward_name, data in ward_results.items():
+                supabase_records.append({
+                    "ward_name": ward_name,
+                    "aqi": data["aqi"],
+                    "status": data["status"],
+                    "last_updated": datetime.now().isoformat()
+                })
+            
+            # Batch upsert into ward_aqi table
+            print(f"📡 Syncing {len(supabase_records)} wards to Supabase...")
+            supabase.table("ward_aqi").upsert(supabase_records, on_conflict="ward_name").execute()
+            print("🚀 Supabase sync complete!")
+        except Exception as e:
+            print(f"❌ Supabase sync failed: {e}")
+    else:
+        print("ℹ️ Skipping Supabase sync (secrets not configured)")
+
     print(f"🚀 Saved fresh results for {len(ward_results)} wards to {OUTPUT_PATH}")
 
 if __name__ == "__main__":

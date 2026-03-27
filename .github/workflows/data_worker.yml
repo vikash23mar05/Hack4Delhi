@@ -18,11 +18,13 @@ jobs:
           python-version: '3.9'
 
       - name: Install Dependencies
-        run: pip install requests
+        run: pip install requests supabase
 
       - name: Run AQI Update Script
         env:
           DATA_GOV_KEY: ${{ secrets.DATA_GOV_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: python scripts/update_aqi.py
 
       - name: Commit and Push Changes

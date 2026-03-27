@@ -7,7 +7,8 @@ import cacService from '../services/cacService';
 import { getStoredWard } from '../services/locationService';
 import LeafletAQIMap from './LeafletAQIMap';
 import HealthRiskDashboard from './HealthRiskDashboard';
-
+import { getOrCreateGuestSession } from '../services/sessionStore';
+import { submitComplaint } from '../services/complaintService';
 import { useWardData } from '../contexts/WardDataContext';
 
 interface CitizenDashboardProps {
@@ -21,61 +22,98 @@ const CitizenDashboard: React.FC<CitizenDashboardProps> = ({ onNavigateMap, dete
   const [isAuditing, setIsAuditing] = useState(false);
   const [reportData, setReportData] = useState({
     image: null as string | null,
+    imageFileName: '' as string,
     location: null as { lat: number; lng: number } | null,
     description: '',
-    type: 'Fire Incident'
+    type: 'Waste Burning' as 'Waste Burning' | 'Construction Dust' | 'Industrial Violation',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitResult, setSubmitResult] = useState<{ id?: string; hash?: string } | null>(null);
   const [joinedMission, setJoinedMission] = useState<boolean>(false);
   const [showHealthRisks, setShowHealthRisks] = useState(false);
+
+  // Current session (set at login)
+  const session = getOrCreateGuestSession();
 
   // Use detected ward or stored ward, fallback to first ward from context
   const userWard = detectedWard || getStoredWard() || (wards.length > 0 ? wards[0] : DELHI_WARDS[0]);
 
   const handleImageCapture = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
       const reader = new FileReader();
       reader.onload = (ev) => {
-        setReportData(prev => ({ ...prev, image: ev.target?.result as string }));
+        setReportData(prev => ({ ...prev, image: ev.target?.result as string, imageFileName: file.name }));
       };
-      reader.readAsDataURL(e.target.files[0]);
+      reader.readAsDataURL(file);
     }
   };
 
   const handleLocationDetect = () => {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((pos) => {
-        setReportData(prev => ({
+      navigator.geolocation.getCurrentPosition(
+        (pos) => setReportData(prev => ({
           ...prev,
           location: { lat: pos.coords.latitude, lng: pos.coords.longitude }
-        }));
-      });
+        })),
+        () => alert('Location access denied. Please enable location permissions.')
+      );
+    } else {
+      alert('Geolocation not supported in this browser.');
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    if (!reportData.description.trim()) {
+      alert('Please add a description before submitting.');
+      return;
+    }
     setIsSubmitting(true);
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsReporting(false);
-      setReportData({ image: null, location: null, description: '', type: 'Fire Incident' });
+    setSubmitResult(null);
 
-      // Award CAC for report (3 CAC) — assign a unique action id to avoid double-award
-      try {
-        const id = `report_${Date.now()}`;
-        const res = cacService.awardCAC(3, { id, note: 'Report submitted' });
-        if (res && res.ok) {
-          alert(`Report dispatched — You earned 3 CAC! New balance: ${res.newBalance} CAC`);
-        } else {
-          // still notify dispatch success
-          alert('Report dispatched to Central Command successfully!');
-        }
-      } catch (e) {
-        alert('Report dispatched to Central Command successfully!');
+    try {
+      const result = await submitComplaint({
+        type: reportData.type,
+        location: reportData.location
+          ? `${reportData.location.lat.toFixed(4)}, ${reportData.location.lng.toFixed(4)}`
+          : userWard.name,
+        ward: userWard.name,
+        intensity: userWard.aqi > 300 ? 'High' : userWard.aqi > 150 ? 'Medium' : 'Low',
+        description: reportData.description,
+        reporter: {
+          userId: session.userId,
+          authMethod: session.authMethod,
+          trustScore: session.trustScore,
+        },
+        coordinates: reportData.location ?? undefined,
+        evidence: reportData.imageFileName ? [reportData.imageFileName] : [],
+        aqiAtSubmission: userWard.aqi,
+      });
+
+      setSubmitResult(result);
+
+      if (result.ok) {
+        // Award CAC for report
+        try {
+          const id = `report_${result.id ?? Date.now()}`;
+          const res = cacService.awardCAC(3, { id, note: 'Report submitted' });
+          if (res?.ok) {
+            // CAC awarded silently; result modal shows the confirmation
+          }
+        } catch {}
       }
+    } catch (err) {
+      console.error('Submit error', err);
+      setSubmitResult({ ok: false } as any);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
-    }, 1500);
+  const handleCloseReport = () => {
+    setIsReporting(false);
+    setSubmitResult(null);
+    setReportData({ image: null, imageFileName: '', location: null, description: '', type: 'Waste Burning' });
   };
 
   const [advice, setAdvice] = useState<string>('');
@@ -387,115 +425,187 @@ const CitizenDashboard: React.FC<CitizenDashboardProps> = ({ onNavigateMap, dete
       </footer>
       {/* Incident Reporting Overlay */}
       {isReporting && (
-        <div className="fixed inset-0 z-50 bg-background-dark/80 backdrop-blur-xl flex items-center justify-center p-6">
-          <div className="bg-[#0a0f0f] border border-white/10 w-full max-w-lg rounded-[2.5rem] p-8 shadow-2xl relative animate-in zoom-in-95 duration-300">
-            <button onClick={() => setIsReporting(false)} className="absolute top-6 right-6 size-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-white/10 transition-colors">
-              <span className="material-symbols-outlined">close</span>
+        <div className="fixed inset-0 z-50 bg-background-dark/80 backdrop-blur-xl flex items-center justify-center p-4 overflow-y-auto">
+          <div className="bg-[#0a0f0f] border border-white/10 w-full max-w-lg rounded-[2.5rem] p-7 shadow-2xl relative animate-in zoom-in-95 duration-300 my-4">
+            <button onClick={handleCloseReport} className="absolute top-5 right-5 size-9 bg-white/5 rounded-full flex items-center justify-center hover:bg-white/10 transition-colors">
+              <span className="material-symbols-outlined text-sm">close</span>
             </button>
 
-            <h2 className="text-2xl font-black uppercase tracking-tighter mb-1 flex items-center gap-3">
-              <span className="material-symbols-outlined text-red-500 text-3xl">e911_emergency</span>
-              Report Incident
-            </h2>
-            <p className="text-xs font-bold text-white/40 uppercase tracking-widest mb-8">Direct Line to Civil Defense</p>
-
-            <div className="space-y-6">
-
-              {/* Type Selection (Simplified) */}
-              <div className="flex gap-3">
-                {['Fire Incident', 'Waste Burning', 'Industrial'].map(type => (
-                  <button
-                    key={type}
-                    onClick={() => setReportData(p => ({ ...p, type }))}
-                    className={`flex-1 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest border transition-all ${reportData.type === type ? 'bg-primary text-background-dark border-primary' : 'bg-white/5 border-white/5 text-white/40 hover:bg-white/10'}`}
-                  >
-                    {type}
-                  </button>
-                ))}
+            {/* ── Success state ── */}
+            {submitResult ? (
+              <div className="py-4 text-center space-y-6">
+                <div className={`size-16 rounded-full flex items-center justify-center mx-auto ${(submitResult as any).ok !== false ? 'bg-green-500/20' : 'bg-red-500/20'}`}>
+                  <span className={`material-symbols-outlined text-3xl ${(submitResult as any).ok !== false ? 'text-green-400' : 'text-red-400'}`}>
+                    {(submitResult as any).ok !== false ? 'check_circle' : 'error'}
+                  </span>
+                </div>
+                <div>
+                  <h3 className="text-xl font-black mb-1">
+                    {(submitResult as any).ok !== false ? 'Report Submitted' : 'Submission Failed'}
+                  </h3>
+                  <p className="text-sm text-white/50">
+                    {(submitResult as any).ok !== false
+                      ? 'Your report has been cryptographically anchored and dispatched to the ward authority.'
+                      : 'Could not reach the server. Your report was logged locally.'}
+                  </p>
+                </div>
+                {submitResult.id && (
+                  <div className="bg-white/5 rounded-2xl p-4 text-left">
+                    <p className="text-[9px] text-white/40 uppercase tracking-widest mb-1">Complaint ID</p>
+                    <p className="font-mono text-sm font-bold text-primary">{submitResult.id}</p>
+                  </div>
+                )}
+                {submitResult.hash && (
+                  <div className="bg-white/5 rounded-2xl p-4 text-left">
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="material-symbols-outlined text-[13px] text-green-400">verified_user</span>
+                      <p className="text-[9px] text-white/40 uppercase tracking-widest">Integrity Hash (SHA-256)</p>
+                    </div>
+                    <p className="font-mono text-[10px] text-white/60 break-all">{submitResult.hash}</p>
+                  </div>
+                )}
+                {(submitResult as any).ok !== false && (
+                  <p className="text-[10px] text-green-400 font-bold">+3 CAC awarded to your account</p>
+                )}
+                <button onClick={handleCloseReport} className="w-full bg-white/10 hover:bg-white/20 text-white py-3 rounded-2xl font-bold text-sm transition-all">
+                  Close
+                </button>
               </div>
+            ) : (
+              <>
+                <h2 className="text-xl font-black uppercase tracking-tighter mb-0.5 flex items-center gap-2">
+                  <span className="material-symbols-outlined text-orange-500 text-2xl">report</span>
+                  Lodge Complaint
+                </h2>
+                <p className="text-[10px] font-bold text-white/40 uppercase tracking-widest mb-5">Verified report to ward authority</p>
 
-              {/* Evidence Module */}
-              <div className="grid grid-cols-2 gap-4">
-                {/* Camera Input */}
-                <div className="relative group">
-                  <input
-                    type="file"
-                    accept="image/*"
-                    capture="environment"
-                    onChange={handleImageCapture}
-                    className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
-                  />
-                  <div className={`h-32 rounded-2xl border-2 border-dashed flex flex-col items-center justify-center transition-all ${reportData.image ? 'border-primary bg-primary/10' : 'border-white/10 bg-white/5 group-hover:border-white/30'}`}>
-                    {reportData.image ? (
-                      <img src={reportData.image} alt="Evidence" className="h-full w-full object-cover rounded-2xl" />
-                    ) : (
-                      <>
-                        <span className="material-symbols-outlined text-3xl mb-2 text-white/50">photo_camera</span>
-                        <span className="text-[9px] font-bold uppercase text-white/30">Add Evidence</span>
-                      </>
-                    )}
+                {/* ── Credibility Preview Strip ── */}
+                <div className="bg-white/5 border border-white/10 rounded-2xl p-4 mb-5">
+                  <p className="text-[9px] font-bold text-white/40 uppercase tracking-widest mb-3">Your Credibility Profile</p>
+                  <div className="grid grid-cols-3 gap-3">
+                    <div>
+                      <p className="text-[8px] text-white/30 mb-1">User ID</p>
+                      <p className="font-mono text-[11px] font-bold text-white/80">{session.userId}</p>
+                    </div>
+                    <div>
+                      <p className="text-[8px] text-white/30 mb-1">Auth</p>
+                      <div className="flex items-center gap-1">
+                        <span className="material-symbols-outlined text-[11px] text-green-400">verified</span>
+                        <p className="text-[10px] text-white/70">{session.authMethod}</p>
+                      </div>
+                    </div>
+                    <div>
+                      <p className="text-[8px] text-white/30 mb-1">Trust Score</p>
+                      <p className={`font-mono text-sm font-black ${session.trustScore >= 0.85 ? 'text-green-400' : session.trustScore >= 0.65 ? 'text-yellow-400' : 'text-red-400'}`}>
+                        {Math.round(session.trustScore * 100)}%
+                      </p>
+                    </div>
+                  </div>
+                  <div className="mt-2 h-1 bg-white/10 rounded-full">
+                    <div className={`h-full rounded-full ${session.trustScore >= 0.85 ? 'bg-green-500' : session.trustScore >= 0.65 ? 'bg-yellow-500' : 'bg-red-500'}`}
+                      style={{ width: `${session.trustScore * 100}%` }}></div>
+                  </div>
+                  <div className="mt-2 flex justify-between text-[8px] text-white/30">
+                    <span>📍 AQI at report: <strong className="text-orange-400">{userWard.aqi}</strong></span>
+                    <span>Ward: <strong className="text-white/60">{userWard.name}</strong></span>
                   </div>
                 </div>
 
-                {/* Location Input */}
-                <button
-                  onClick={handleLocationDetect}
-                  className={`h-32 rounded-2xl border-2 flex flex-col items-center justify-center transition-all ${reportData.location ? 'border-green-500 bg-green-500/10' : 'border-white/10 bg-white/5 hover:border-white/30'}`}
-                >
-                  {reportData.location ? (
-                    <>
-                      <span className="material-symbols-outlined text-3xl mb-2 text-green-500">my_location</span>
-                      <span className="text-[9px] font-bold uppercase text-green-500">
-                        {reportData.location.lat.toFixed(4)}, {reportData.location.lng.toFixed(4)}
-                      </span>
-                    </>
-                  ) : (
-                    <>
-                      <span className="material-symbols-outlined text-3xl mb-2 text-white/50">add_location_alt</span>
-                      <span className="text-[9px] font-bold uppercase text-white/30">Tag Location</span>
-                    </>
-                  )}
-                </button>
-              </div>
+                <div className="space-y-4">
+                  {/* Incident Type */}
+                  <div>
+                    <p className="text-[9px] text-white/40 uppercase tracking-widest mb-2">Incident Type</p>
+                    <div className="flex gap-2">
+                      {(['Waste Burning', 'Construction Dust', 'Industrial Violation'] as const).map(type => (
+                        <button
+                          key={type}
+                          onClick={() => setReportData(p => ({ ...p, type }))}
+                          className={`flex-1 py-2.5 rounded-xl text-[9px] font-black uppercase tracking-widest border transition-all ${
+                            reportData.type === type
+                              ? 'bg-orange-500 text-white border-orange-500'
+                              : 'bg-white/5 border-white/5 text-white/40 hover:bg-white/10'
+                          }`}
+                        >
+                          {type.split(' ')[0]}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
 
-              {/* Description */}
-              <div>
-                <textarea
-                  value={reportData.description}
-                  onChange={(e) => setReportData(p => ({ ...p, description: e.target.value }))}
-                  placeholder="Describe the incident (e.g. 'Large smoke plume visible near market area...')"
-                  className="w-full bg-white/5 border border-white/10 rounded-2xl p-4 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-primary/50 transition-all min-h-[100px] resize-none"
-                ></textarea>
-              </div>
+                  {/* Evidence + GPS */}
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="relative group">
+                      <input type="file" accept="image/*" capture="environment"
+                        onChange={handleImageCapture}
+                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" />
+                      <div className={`h-28 rounded-xl border-2 border-dashed flex flex-col items-center justify-center transition-all ${reportData.image ? 'border-orange-500 bg-orange-500/10' : 'border-white/10 bg-white/5 group-hover:border-white/30'}`}>
+                        {reportData.image ? (
+                          <img src={reportData.image} alt="Evidence" className="h-full w-full object-cover rounded-xl" />
+                        ) : (
+                          <>
+                            <span className="material-symbols-outlined text-2xl mb-1 text-white/50">photo_camera</span>
+                            <span className="text-[9px] font-bold uppercase text-white/30">Add Photo Evidence</span>
+                          </>
+                        )}
+                      </div>
+                    </div>
 
-              <div className="pt-2">
-                <button
-                  onClick={handleSubmit}
-                  disabled={isSubmitting}
-                  className="w-full bg-red-500 text-white py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:brightness-110 active:scale-95 transition-all shadow-[0_0_20px_rgba(239,68,68,0.4)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
-                >
-                  {isSubmitting ? (
-                    <>
-                      <span className="size-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
-                      Dispatching...
-                    </>
-                  ) : (
-                    <>
-                      <span className="material-symbols-outlined">send</span>
-                      Submit Report
-                    </>
-                  )}
-                </button>
-                <p className="text-center text-[9px] text-white/30 font-bold uppercase mt-4">
-                  False reporting is a punishable offense under Section 182 IPC.
-                </p>
-              </div>
+                    <button onClick={handleLocationDetect}
+                      className={`h-28 rounded-xl border-2 flex flex-col items-center justify-center transition-all ${reportData.location ? 'border-green-500 bg-green-500/10' : 'border-white/10 bg-white/5 hover:border-white/30'}`}>
+                      {reportData.location ? (
+                        <>
+                          <span className="material-symbols-outlined text-2xl mb-1 text-green-400">my_location</span>
+                          <span className="text-[9px] font-bold text-green-400">
+                            {reportData.location.lat.toFixed(4)}°N
+                          </span>
+                          <span className="text-[9px] font-bold text-green-400">
+                            {reportData.location.lng.toFixed(4)}°E
+                          </span>
+                        </>
+                      ) : (
+                        <>
+                          <span className="material-symbols-outlined text-2xl mb-1 text-white/50">add_location_alt</span>
+                          <span className="text-[9px] font-bold uppercase text-white/30">Tag GPS Location</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
 
-            </div>
+                  {/* Description */}
+                  <textarea
+                    value={reportData.description}
+                    onChange={(e) => setReportData(p => ({ ...p, description: e.target.value }))}
+                    placeholder="Describe what you see — specifics help the authority respond faster (e.g. 'Large smoke plume near ISBT gate 3...')"
+                    className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-orange-500/50 transition-all min-h-[90px] resize-none"
+                  />
+
+                  {/* Submit */}
+                  <button
+                    onClick={handleSubmit}
+                    disabled={isSubmitting || !reportData.description.trim()}
+                    className="w-full bg-orange-500 hover:bg-orange-400 text-white py-3.5 rounded-2xl font-black text-sm uppercase tracking-widest transition-all disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <span className="size-4 border-2 border-white/40 border-t-white rounded-full animate-spin"></span>
+                        Submitting & Hashing...
+                      </>
+                    ) : (
+                      <>
+                        <span className="material-symbols-outlined text-sm">send</span>
+                        Submit Verified Report
+                      </>
+                    )}
+                  </button>
+                  <p className="text-center text-[9px] text-white/25 font-bold uppercase">
+                    Report is SHA-256 anchored at submission · False reporting is a punishable offense under Section 182 IPC
+                  </p>
+                </div>
+              </>
+            )}
           </div>
         </div>
-      )
-      }
+      )}
 
       {/* Citizen Audits Modal */}
       {isAuditing && (

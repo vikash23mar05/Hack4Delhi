@@ -1,0 +1,63 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.slashed-pattern {
+    background-image: repeating-linear-gradient(45deg, rgba(0,0,0,0.05) 0px, rgba(0,0,0,0.05) 2px, transparent 2px, transparent 8px);
+}
+
+.slashed-pattern-critical {
+    background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.1) 10px, rgba(255,255,255,0.1) 20px);
+}
+
+.hard-shadow {
+    box-shadow: 4px 4px 0px 0px #000000;
+}
+
+.industrial-grid {
+    background-size: 40px 40px;
+    background-image: linear-gradient(to right, rgba(0,0,0,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,0,0,0.05) 1px, transparent 1px);
+}
+
+.glass-panel {
+    background: rgba(26, 32, 44, 0.8);
+    backdrop-filter: blur(20px);
+}
+
+.signal-bar {
+    width: 4px;
+    height: 100%;
+    background-color: #ffb866;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.font-mono-tech {
+    font-family: 'Space Mono', monospace;
+}
+
+.font-headline {
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 4px;
+}
+::-webkit-scrollbar-track {
+    background: #0d131f;
+}
+::-webkit-scrollbar-thumb {
+    background: #ad2c00;
+    border-radius: 2px;
+}
+
+.dark .slashed-pattern {
+    background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.05) 0px, rgba(255,255,255,0.05) 2px, transparent 2px, transparent 8px);
+}
+
+.dark .industrial-grid {
+    background-image: linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+}

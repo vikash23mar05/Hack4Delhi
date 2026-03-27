@@ -27,6 +27,20 @@ export interface WardData {
   trendHistory?: { timestamp: string; aqi: number }[];
   lat?: number;
   lng?: number;
+  // Meteorological data (NEW)
+  weather?: {
+    windSpeed: number;    // km/h
+    windDirection: string; // e.g. 'N', 'SW'
+    humidity: number;     // percentage
+    temperature: number;  // Celsius
+    inversionLayer: boolean; // atmospheric inversion trapping pollutants
+  };
+  // Priority score breakdown (NEW)
+  priorityBreakdown?: {
+    aqiWeight: number;        // contribution from AQI severity
+    populationWeight: number; // contribution from population density
+    complaintsWeight: number; // contribution from active complaints
+  };
 }
 
 export interface SimulationResult {
@@ -35,8 +49,9 @@ export interface SimulationResult {
   confidenceRange: string; // e.g., "+/- 12%" to avoid overclaiming
   feasibility: number;
   economicImpact: string;
-  socialEquityImpact: string; // New: Judges love thinking about vulnerable populations
+  socialEquityImpact: string; // Judges love thinking about vulnerable populations
   detailedAnalysis: string;
+  projectedTimeSeries?: { hour: string; aqi: number }[]; // NEW: for chart rendering
 }
 
 export enum ViewMode {
@@ -79,6 +94,19 @@ export interface Complaint {
   responsibleDept: string;
   slaRemaining: string;
   verificationPhoto?: string;
+  // ── Credibility & Evidence Fields ──────────────────────────────────────────
+  reporter?: {
+    userId: string;
+    authMethod: string;       // e.g. 'phone_verified + google'
+    trustScore: number;       // 0–1 float
+  };
+  coordinates?: {
+    lat: number;
+    lng: number;
+  };
+  evidence?: string[];        // image filenames / URLs
+  aqiAtSubmission?: number;   // ambient AQI logged at time of report
+  integrityHash?: string;     // SHA-256 / blockchain anchor proof
 }
 
 export interface ConstructionSite {

@@ -16,11 +16,38 @@ import { WardDataProvider } from './contexts/WardDataContext';
 import { ViewMode, UserRole, WardData, AuthorityRole } from './types';
 import { detectUserWard, storeUserWard, getStoredWard } from './services/locationService';
 
+// Simple Error Boundary
+class ErrorBoundary extends React.Component<{children: React.ReactNode}, {hasError: boolean, error: any}> {
+  constructor(props: {children: React.ReactNode}) {
+    super(props);
+    this.state = { hasError: false, error: null };
+  }
+  static getDerivedStateFromError(error: any) { return { hasError: true, error }; }
+  componentDidCatch(error: any, errorInfo: any) { console.error("Sentinel Hub Error:", error, errorInfo); }
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="p-20 bg-red-950 text-white font-headline h-screen flex flex-col items-center justify-center text-center gap-6">
+           <h1 className="text-6xl font-black uppercase tracking-tighter">Command System Failure</h1>
+           <p className="max-w-xl text-red-200 uppercase tracking-widest text-xs font-bold opacity-70">A critical telemetry disruption has been detected in the Sentinel Command interface.</p>
+           <div className="bg-black/50 p-6 rounded border border-red-500/50 font-mono-tech text-[10px] text-left overflow-auto max-w-[80vw] max-h-[40vh]">
+              {this.state.error?.stack || this.state.error?.message || "Unknown Core Exception"}
+           </div>
+           <button onClick={() => window.location.reload()} className="bg-white text-black px-10 py-5 font-black uppercase tracking-[0.3em] text-xs hover:bg-neutral-200 transition-all active:scale-95">Re-Sync Neural Link</button>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
+
 const App: React.FC = () => {
   return (
-    <WardDataProvider>
-      <AppContent />
-    </WardDataProvider>
+    <ErrorBoundary>
+      <WardDataProvider>
+        <AppContent />
+      </WardDataProvider>
+    </ErrorBoundary>
   );
 };
 
@@ -30,25 +57,11 @@ const AppContent: React.FC = () => {
   const [detectedWard, setDetectedWard] = useState<WardData | null>(null);
   const [locationRequested, setLocationRequested] = useState(false);
   const [authorityRole, setAuthorityRole] = useState<AuthorityRole>(null);
+  const [showAgent, setShowAgent] = useState(true);
 
-  const analyticsViewUrl = new URL('./analytics_view_-_data_analysts/code.html', import.meta.url).href;
-  const executiveViewUrl = new URL('./executive_view_-_senior_decision_makers/code.html', import.meta.url).href;
-  const fieldViewUrl = new URL('./field_view_-_enforcement_officers/code.html', import.meta.url).href;
-  const operationalViewUrl = new URL('./operational_view_-_department_heads/code.html', import.meta.url).href;
 
   const getAuthorityViewForRole = (role: AuthorityRole): ViewMode => {
-    switch (role) {
-      case 'ANALYTICS':
-        return ViewMode.AUTHORITY_ANALYTICS;
-      case 'EXECUTIVE':
-        return ViewMode.AUTHORITY_EXECUTIVE;
-      case 'FIELD':
-        return ViewMode.AUTHORITY_FIELD;
-      case 'OPERATIONAL':
-        return ViewMode.AUTHORITY_OPERATIONAL;
-      default:
-        return ViewMode.AUTHORITY_ROLE_SELECT;
-    }
+    return ViewMode.AUTHORITY_DASHBOARD;
   };
 
   // Detect location on app load
@@ -91,7 +104,7 @@ const AppContent: React.FC = () => {
 
   const handleAuthorityRoleSelection = (role: AuthorityRole) => {
     setAuthorityRole(role);
-    setViewMode(getAuthorityViewForRole(role));
+    setViewMode(ViewMode.AUTHORITY_DASHBOARD);
   };
 
   const handleSignOut = () => {
@@ -189,50 +202,10 @@ const AppContent: React.FC = () => {
         );
       case ViewMode.AUTHORITY_ROLE_SELECT:
         return <AuthorityRolePicker onSelect={handleAuthorityRoleSelection} onBack={() => setViewMode(ViewMode.LOGIN)} />;
-      case ViewMode.AUTHORITY_ANALYTICS:
-        return (
-          <AuthorityRoleView
-            title="Analytics View – Data Analysts"
-            description="Sensor QA, anomaly hunts, and ML model performance telemetry."
-            src={analyticsViewUrl}
-            onBack={() => setViewMode(ViewMode.AUTHORITY_ROLE_SELECT)}
-            hideMap={true}
-          />
-        );
-      case ViewMode.AUTHORITY_EXECUTIVE:
-        return (
-          <AuthorityRoleView
-            title="Executive View – Senior Decision Makers"
-            description="Policy dashboards, mandate approvals, and risk monitoring."
-            src={executiveViewUrl}
-            onBack={() => setViewMode(ViewMode.AUTHORITY_ROLE_SELECT)}
-            hideMap={true}
-          />
-        );
-      case ViewMode.AUTHORITY_FIELD:
-        return (
-          <AuthorityRoleView
-            title="Field View – Enforcement Officers"
-            description="Mobile-first enforcement, evidence capture, and live incident queues."
-            src={fieldViewUrl}
-            onBack={() => setViewMode(ViewMode.AUTHORITY_ROLE_SELECT)}
-            hideMap={true}
-          />
-        );
-      case ViewMode.AUTHORITY_OPERATIONAL:
-        return (
-          <AuthorityRoleView
-            title="Operational View – Department Heads"
-            description="Cross-department tasking, SLA tracking, and rapid incident triage."
-            src={operationalViewUrl}
-            onBack={() => setViewMode(ViewMode.AUTHORITY_ROLE_SELECT)}
-            hideMap={true}
-          />
-        );
       case ViewMode.CITIZEN_DASHBOARD:
         return <CitizenDashboard onNavigateMap={() => setViewMode(ViewMode.MAP_VIEW)} detectedWard={detectedWard || undefined} />;
       case ViewMode.AUTHORITY_DASHBOARD:
-        return <AuthorityDashboard onNavigateMap={() => setViewMode(ViewMode.MAP_VIEW)} />;
+        return <AuthorityDashboard onNavigateMap={() => setViewMode(ViewMode.MAP_VIEW)} onSignOut={handleSignOut} />;
       case ViewMode.MAP_VIEW:
         return <InteractiveMap onBack={() => {
           if (!userRole) {
@@ -258,19 +231,48 @@ const AppContent: React.FC = () => {
     }
   };
 
+  const isAuthorityDashboard = viewMode === ViewMode.AUTHORITY_DASHBOARD;
+
   return (
     <div className="min-h-screen bg-background-light dark:bg-background-dark text-white flex flex-col selection:bg-primary/30">
-      <Header
-        viewMode={viewMode}
-        onEnterDashboard={handleEnterPlatform}
-        onSignOut={handleSignOut}
-        onNavigate={handleNavigate}
-      />
-      <main className="pt-24 flex flex-1">
+      {!isAuthorityDashboard && (
+        <Header
+          viewMode={viewMode}
+          onEnterDashboard={handleEnterPlatform}
+          onSignOut={handleSignOut}
+          onNavigate={handleNavigate}
+        />
+      )}
+      <main className={`${isAuthorityDashboard ? '' : 'pt-24'} flex flex-1`}>
         {viewMode === ViewMode.LANDING && <Sidebar />}
         {renderContent()}
       </main>
-      <elevenlabs-convai agent-id="agent_1301kepesa21eg39f6q2nktr14cj"></elevenlabs-convai>
+
+      {/* ElevenLabs AI Agent — toggleable */}
+      <div className="fixed bottom-4 right-4 z-[9999] flex flex-col items-end gap-2">
+        {showAgent ? (
+          <>
+            <button
+              onClick={() => setShowAgent(false)}
+              title="Hide assistant"
+              className="flex items-center gap-1.5 px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-white text-[11px] font-semibold rounded-full shadow-lg transition-all border border-zinc-700 self-end"
+            >
+              <span className="material-symbols-outlined text-sm">visibility_off</span>
+              Hide assistant
+            </button>
+            <elevenlabs-convai agent-id="agent_1301kepesa21eg39f6q2nktr14cj"></elevenlabs-convai>
+          </>
+        ) : (
+          <button
+            onClick={() => setShowAgent(true)}
+            title="Show AI assistant"
+            className="flex items-center gap-2 px-4 py-2.5 bg-zinc-900 hover:bg-zinc-800 text-white text-[12px] font-semibold rounded-full shadow-xl transition-all border border-zinc-700"
+          >
+            <span className="material-symbols-outlined text-base">support_agent</span>
+            Need help?
+          </button>
+        )}
+      </div>
     </div>
   );
 };

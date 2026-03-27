@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import L from 'leaflet';
+import * as L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { enrichWardGeoJSON, EnrichedWardGeoJSON, getAQICategory } from '../services/aqiMapService';
 
@@ -11,6 +11,7 @@ interface LeafletMapProps {
   showChrome?: boolean; // toggles search/legend overlays for embedded use
   center?: { lat: number; lng: number };
   zoom?: number;
+  wardData?: any[]; // Allow passing context WardData array
 }
 
 interface HoverTooltip {
@@ -52,12 +53,14 @@ const LeafletAQIMap: React.FC<LeafletMapProps> = ({
   showChrome = true,
   center = DELHI_CENTER,
   zoom = DEFAULT_ZOOM,
+  wardData = undefined,
 }) => {
   const mapContainer = useRef<HTMLDivElement>(null);
   const mapInstance = useRef<L.Map | null>(null);
   const geoJsonLayer = useRef<L.GeoJSON | null>(null);
   const [enrichedWards, setEnrichedWards] = useState<EnrichedWardGeoJSON[]>([]);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [hoverTooltip, setHoverTooltip] = useState<HoverTooltip>({
     visible: false,
@@ -84,16 +87,32 @@ const LeafletAQIMap: React.FC<LeafletMapProps> = ({
       zoom
     );
 
-    // Add tile layer (OpenStreetMap dark theme)
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-      attribution:
-        '© OpenStreetMap contributors © CartoDB',
+    // Add tile layer (OpenStreetMap standard with better reliability)
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors',
       maxZoom: 19,
     }).addTo(map);
 
     mapInstance.current = map;
 
+    // Fix for map not loading properly in hidden/sized containers
+    const resizeObserver = new ResizeObserver(() => {
+      if (mapInstance.current) {
+        mapInstance.current.invalidateSize();
+      }
+    });
+
+    if (mapContainer.current) {
+      resizeObserver.observe(mapContainer.current);
+    }
+
+    // Initial timeout fix for common Leaflet race conditions with flexbox
+    setTimeout(() => {
+      if (mapInstance.current) mapInstance.current.invalidateSize();
+    }, 100);
+
     return () => {
+      resizeObserver.disconnect();
       map.remove();
     };
   }, []);
@@ -109,7 +128,6 @@ const LeafletAQIMap: React.FC<LeafletMapProps> = ({
   const loadGeoJSONData = async () => {
     setLoading(true);
     try {
-      // If no geojsonData provided, attempt to load from file
       let data = geojsonData;
       if (!data) {
         const response = await fetch('/delhi_wards.geojson');
@@ -117,7 +135,38 @@ const LeafletAQIMap: React.FC<LeafletMapProps> = ({
         data = await response.json();
       }
 
-      const enriched = await enrichWardGeoJSON(data);
+      let enriched: EnrichedWardGeoJSON[] = [];
+      if (wardData && wardData.length > 0) {
+        const features = data.type === 'FeatureCollection' ? (data.features || []) : [data];
+        enriched = features.map((feature: any) => {
+          const props = feature.properties || {};
+          const wardName = (props.Ward_Name || props.name || props.Ward || '').toUpperCase();
+          const wardId = props.Ward_No || props.id || '';
+          
+          const matched = wardData.find(w => w.id === wardId || w.name.toUpperCase() === wardName);
+          const aqi = matched?.aqi || 150;
+          const category = getAQICategory(aqi);
+          
+          return {
+            type: 'Feature',
+            properties: {
+              ward_id: wardId,
+              ward_name: wardName,
+              aqi: aqi,
+              aqi_category: category.label,
+              source: matched ? 'sensor' : 'estimated',
+              last_updated: new Date().toISOString(),
+              color: category.color,
+              priority_score: Math.round(aqi / 5),
+              population_density: matched?.populationDensity || 'Unknown',
+            },
+            geometry: feature.geometry
+          } as EnrichedWardGeoJSON;
+        });
+      } else {
+        enriched = await enrichWardGeoJSON(data);
+      }
+
       setEnrichedWards(enriched);
 
       // Render GeoJSON on map
@@ -226,8 +275,9 @@ const LeafletAQIMap: React.FC<LeafletMapProps> = ({
 
         setWardLayers(layerMap);
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Failed to load GeoJSON:', error);
+      setError(error.message || String(error));
     } finally {
       setLoading(false);
     }
@@ -308,6 +358,11 @@ const LeafletAQIMap: React.FC<LeafletMapProps> = ({
           position: 'relative',
         }}
       />
+      {error && (
+        <div style={{ position: 'absolute', top: 10, left: 10, right: 10, zIndex: 9999, background: 'red', color: 'white', padding: 10 }}>
+          {error}
+        </div>
+      )}
 
       {/* Back Button and Search Input */}
       {showChrome && (
