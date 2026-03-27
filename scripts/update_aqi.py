@@ -103,7 +103,7 @@ def update_ward_predictions():
 
         predicted_aqi = weighted_aqi_sum / total_weight if total_weight > 0 else 150
 
-        ward_results[ward_name] = {
+        ward_results[ward_name.upper()] = {
             "aqi": round(predicted_aqi),
             "status": "SEVERE" if predicted_aqi > 300 else "POOR" if predicted_aqi > 200 else "MODERATE",
             "lastUpdated": datetime.now().strftime("%Y-%m-%d %H:%M")
