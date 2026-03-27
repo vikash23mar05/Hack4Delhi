@@ -108,21 +108,55 @@ const CleanAirCreditsPage: React.FC<CleanAirCreditsPageProps> = ({ onNavigate })
           </div>
         </div>
 
-        {/* Energy Equivalence */}
-        <div className="bg-gradient-to-r from-green-500/10 via-emerald-500/10 to-green-500/10 border border-green-500/20 rounded-[2.5rem] p-12 text-center">
-          <h2 className="text-2xl font-black uppercase tracking-widest mb-4">Clean Energy Impact</h2>
-          <div className="flex items-center justify-center gap-6">
-            <div className="text-5xl font-black text-green-400">15 CAC</div>
-            <div className="text-2xl text-white/50">=</div>
+        {/* Reward Rate Card */}
+        <div className="space-y-6">
+          <div className="text-center">
+            <h2 className="text-3xl font-bold uppercase tracking-widest text-white mb-2">What You Can Redeem</h2>
+            <p className="text-sm text-white/40 font-bold uppercase tracking-widest">1 CAC = ₹1 Notional Govt. Credit • Backed by Delhi Dept. APIs</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {[
+              { icon: 'directions_bus', title: '1 DTC Bus Trip',         cost: 15,  dept: 'Delhi Transport Corp.',        cat: 'Transit', catColor: 'text-blue-400'   },
+              { icon: 'subway',         title: '1 Delhi Metro Ride',     cost: 30,  dept: 'DMRC (QR e-ticketing)',        cat: 'Transit', catColor: 'text-blue-400'   },
+              { icon: 'masks',          title: '5× N95 Masks',           cost: 20,  dept: 'DPCC Distribution Centres',    cat: 'Health',  catColor: 'text-red-400'    },
+              { icon: 'local_hospital', title: 'Priority OPD Token',     cost: 50,  dept: 'GNCT Govt. Hospitals',         cat: 'Health',  catColor: 'text-red-400'    },
+              { icon: 'park',           title: '1 Sapling Planted',      cost: 50,  dept: 'Delhi Forest Dept. Nurseries', cat: 'Green',   catColor: 'text-green-400'  },
+              { icon: 'solar_power',    title: '₹100 Solar Subsidy',     cost: 100, dept: 'PM Surya Ghar / DISCOM',       cat: 'Green',   catColor: 'text-green-400'  },
+              { icon: 'home',           title: '₹100 Property Tax Off',  cost: 100, dept: 'Municipal Corp. of Delhi',     cat: 'Civic',   catColor: 'text-yellow-400' },
+              { icon: 'local_gas_station', title: '₹200 CNG Voucher',   cost: 200, dept: 'Transport Dept. / IGL',        cat: 'Civic',   catColor: 'text-yellow-400' },
+            ].map((r, i) => (
+              <div key={i} className="glass-panel rounded-2xl p-5 border-white/5 hover:border-white/15 transition-all flex items-center gap-5">
+                <div className="size-12 rounded-xl bg-white/5 flex items-center justify-center flex-shrink-0">
+                  <span className={`material-symbols-outlined text-2xl ${r.catColor}`}>{r.icon}</span>
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 mb-0.5">
+                    <span className={`text-[10px] font-black uppercase tracking-widest ${r.catColor}`}>{r.cat}</span>
+                  </div>
+                  <p className="font-black text-sm leading-tight">{r.title}</p>
+                  <p className="text-[11px] text-white/40 mt-0.5 truncate">{r.dept}</p>
+                </div>
+                <div className="text-right flex-shrink-0">
+                  <p className="text-2xl font-black text-white">{r.cost}</p>
+                  <p className="text-[10px] font-bold text-white/40 uppercase">CAC</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="bg-green-500/5 border border-green-500/20 rounded-2xl p-6 flex items-center gap-6">
+            <span className="material-symbols-outlined text-4xl text-green-400 flex-shrink-0">verified</span>
             <div>
-              <p className="text-3xl font-black text-green-400">1 kWh</p>
-              <p className="text-sm text-white/40 font-bold uppercase tracking-widest">Clean Energy Equivalent</p>
+              <p className="font-black uppercase tracking-tight">Every reward has a real implementation path</p>
+              <p className="text-white/50 text-sm mt-1">
+                Each benefit above connects to an existing Delhi govt. dept. API, portal, or scheme. Integration requires
+                a government API key — zero new infrastructure.
+              </p>
             </div>
           </div>
-          <p className="text-white/60 mt-8 max-w-xl mx-auto">
-            Your verified actions translate directly into measurable clean air impact — tracked at the ward level to show real change where it matters.
-          </p>
         </div>
+
 
         {/* Why This Matters */}
         <div className="space-y-8">

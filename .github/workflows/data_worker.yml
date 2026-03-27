@@ -5,12 +5,17 @@ on:
     - cron: '0 * * * *' # Every 60 minutes
   workflow_dispatch: # Allow manual trigger
 
+permissions:
+  contents: write  # Required for the bot to commit and push
+
 jobs:
   update_aqi:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Python
         uses: actions/setup-python@v4
@@ -28,9 +33,12 @@ jobs:
         run: python scripts/update_aqi.py
 
       - name: Commit and Push Changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config --global user.name "Ward-Wise Delhi AI Bot"
           git config --global user.email "bot@delhiaqi.gov"
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}
           git add .
           git commit -m "🤖 [BOT] Update Hourly Ward-Wise AQI Predictions" || echo "No changes to commit"
           git push origin main
