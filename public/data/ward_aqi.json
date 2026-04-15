@@ -1,1442 +1,1442 @@
 {
   "DELHI CANTT CHARGE 1": {
-    "aqi": 166,
+    "aqi": 180,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
   "DELHI CANTT CHARGE 2": {
-    "aqi": 165,
+    "aqi": 173,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
   "DELHI CANTT CHARGE 4": {
-    "aqi": 167,
+    "aqi": 170,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
   "DELHI CANTT CHARGE 5": {
-    "aqi": 171,
+    "aqi": 174,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
   "DELHI CANTT CHARGE 6": {
-    "aqi": 164,
+    "aqi": 168,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
   "DELHI CANTT CHARGE 7": {
-    "aqi": 164,
+    "aqi": 168,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
   "DELHI CANTT CHARGE 8": {
-    "aqi": 168,
+    "aqi": 173,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
   "DELHI CANTT CHARGE 3": {
-    "aqi": 166,
+    "aqi": 168,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
   "NDMC CHARGE 1": {
-    "aqi": 168,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "NDMC CHARGE 2": {
-    "aqi": 170,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "NDMC CHARGE 3": {
-    "aqi": 155,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "NDMC CHARGE 4": {
-    "aqi": 170,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "NDMC CHARGE 5": {
-    "aqi": 170,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "NDMC CHARGE 7": {
-    "aqi": 168,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "NDMC CHARGE 8": {
-    "aqi": 165,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "NDMC CHARGE 9": {
-    "aqi": 166,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "NDMC CHARGE 6": {
-    "aqi": 171,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "CHANDNI CHOWK": {
-    "aqi": 178,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "MINTO ROAD": {
-    "aqi": 171,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "KUCHA PANDIT": {
     "aqi": 172,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "BAZAR SITARAM": {
-    "aqi": 173,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "IDGAH ROAD": {
-    "aqi": 173,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "KHYALA": {
-    "aqi": 182,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "JANAK PURI NORTH": {
-    "aqi": 176,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "MUKHERJEE NAGAR": {
-    "aqi": 193,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "JANAK PURI WEST": {
-    "aqi": 180,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "JANAK PURI SOUTH": {
+  "NDMC CHARGE 2": {
     "aqi": 175,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "MILAP NAGAR": {
-    "aqi": 179,
+  "NDMC CHARGE 3": {
+    "aqi": 171,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "SITA PURI": {
-    "aqi": 178,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "CHHAWLA": {
-    "aqi": 185,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "NANGLI SAKRAVATI": {
-    "aqi": 176,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "KAKRAULA": {
+  "NDMC CHARGE 4": {
     "aqi": 173,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "KHERA": {
-    "aqi": 186,
+  "NDMC CHARGE 5": {
+    "aqi": 173,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "DILSHAD GARDEN": {
-    "aqi": 178,
+  "NDMC CHARGE 7": {
+    "aqi": 172,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "NEW SEEMA PURI": {
-    "aqi": 178,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "NAND NAGRI": {
-    "aqi": 180,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "SUNDER NAGARI": {
-    "aqi": 179,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "DURGA PURI": {
-    "aqi": 177,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "ASHOK NAGAR": {
-    "aqi": 182,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "RAM NAGAR": {
+  "NDMC CHARGE 8": {
     "aqi": 169,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "WELCOME COLONY": {
-    "aqi": 179,
+  "NDMC CHARGE 9": {
+    "aqi": 164,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "CHAUHAN BANGER": {
-    "aqi": 186,
+  "NDMC CHARGE 6": {
+    "aqi": 175,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "ZAFFRABAD": {
+  "CHANDNI CHOWK": {
     "aqi": 181,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "MAUJPUR": {
-    "aqi": 186,
+  "MINTO ROAD": {
+    "aqi": 175,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "GHONDA": {
-    "aqi": 192,
+  "KUCHA PANDIT": {
+    "aqi": 175,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "YAMUNA VIHAR": {
-    "aqi": 193,
+  "BAZAR SITARAM": {
+    "aqi": 176,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "SUBHASH MOHALLA": {
-    "aqi": 185,
+  "IDGAH ROAD": {
+    "aqi": 176,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "KARDAM PURI": {
+  "KHYALA": {
     "aqi": 183,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "JANTA COLONY": {
+  "JANAK PURI NORTH": {
+    "aqi": 180,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "MUKHERJEE NAGAR": {
+    "aqi": 192,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "JANAK PURI WEST": {
     "aqi": 181,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "BABAR PUR": {
-    "aqi": 178,
+  "JANAK PURI SOUTH": {
+    "aqi": 179,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "JIWANPUR": {
-    "aqi": 187,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "GOKALPUR": {
-    "aqi": 187,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "SABOLI": {
-    "aqi": 182,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "HARSH VIHAR": {
+  "MILAP NAGAR": {
     "aqi": 181,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "SHIV VIHAR": {
+  "SITA PURI": {
+    "aqi": 180,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "CHHAWLA": {
+    "aqi": 184,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "NANGLI SAKRAVATI": {
+    "aqi": 179,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "KAKRAULA": {
+    "aqi": 177,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "KHERA": {
+    "aqi": 184,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "DILSHAD GARDEN": {
+    "aqi": 186,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "NEW SEEMA PURI": {
+    "aqi": 186,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "NAND NAGRI": {
+    "aqi": 186,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "SUNDER NAGARI": {
+    "aqi": 186,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "DURGA PURI": {
+    "aqi": 183,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "ASHOK NAGAR": {
+    "aqi": 187,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "RAM NAGAR": {
+    "aqi": 174,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "WELCOME COLONY": {
+    "aqi": 186,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "CHAUHAN BANGER": {
+    "aqi": 190,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "ZAFFRABAD": {
+    "aqi": 187,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "MAUJPUR": {
+    "aqi": 191,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "GHONDA": {
+    "aqi": 195,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "YAMUNA VIHAR": {
+    "aqi": 197,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "SUBHASH MOHALLA": {
+    "aqi": 190,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "KARDAM PURI": {
     "aqi": 189,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "JANTA COLONY": {
+    "aqi": 187,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "BABAR PUR": {
+    "aqi": 185,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "JIWANPUR": {
+    "aqi": 191,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "GOKALPUR": {
+    "aqi": 191,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "SABOLI": {
+    "aqi": 187,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "HARSH VIHAR": {
+    "aqi": 187,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "SHIV VIHAR": {
+    "aqi": 192,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
   },
   "KARAWAL NAGAR EAST": {
-    "aqi": 193,
+    "aqi": 196,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
   "MUSTAFABAD": {
-    "aqi": 198,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "aqi": 201,
+    "status": "POOR",
+    "lastUpdated": "2026-04-15 07:55"
   },
   "KHAJOORI KHAS": {
     "aqi": 241,
     "status": "POOR",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
   "KARAWAL NAGAR WEST": {
-    "aqi": 190,
+    "aqi": 192,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
   "SONIA VIHAR": {
-    "aqi": 189,
+    "aqi": 191,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
   "NIZAMUDDIN": {
-    "aqi": 177,
+    "aqi": 179,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
   "BHOGAL": {
-    "aqi": 178,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "KASTURBA NAGAR": {
-    "aqi": 174,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "AMAR COLONY": {
-    "aqi": 181,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "MALVIYA NAGAR": {
-    "aqi": 164,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "HAUZ RANI": {
-    "aqi": 169,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "ANDREWSGANJ": {
-    "aqi": 177,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "VASANT VIHAR": {
-    "aqi": 165,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "MUNIRKA": {
-    "aqi": 170,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "NANAK PURA": {
-    "aqi": 157,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "VASANTKUNJ": {
-    "aqi": 164,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "DAKSHINPURI EXT.": {
-    "aqi": 173,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "KHANPUR": {
-    "aqi": 170,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "AMBEDKAR NAGAR": {
-    "aqi": 171,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "MADANGIR": {
-    "aqi": 172,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "PUSHP VIHAR": {
-    "aqi": 171,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "TUGHLAKABAD EXTN": {
-    "aqi": 172,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "SANGAM VIHAR CENTRAL": {
-    "aqi": 172,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "SANGAM VIHAR EAST": {
-    "aqi": 173,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "CHIRAG DELHI": {
-    "aqi": 173,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "CHITRANJAN PARK": {
     "aqi": 175,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "KASTURBA NAGAR": {
+    "aqi": 175,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "AMAR COLONY": {
+    "aqi": 135,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "MALVIYA NAGAR": {
+    "aqi": 167,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "HAUZ RANI": {
+    "aqi": 171,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "ANDREWSGANJ": {
+    "aqi": 172,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "VASANT VIHAR": {
+    "aqi": 170,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "MUNIRKA": {
+    "aqi": 189,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "NANAK PURA": {
+    "aqi": 161,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "VASANTKUNJ": {
+    "aqi": 169,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "DAKSHINPURI EXT.": {
+    "aqi": 175,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "KHANPUR": {
+    "aqi": 172,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "AMBEDKAR NAGAR": {
+    "aqi": 174,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "MADANGIR": {
+    "aqi": 174,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "PUSHP VIHAR": {
+    "aqi": 173,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "TUGHLAKABAD EXTN": {
+    "aqi": 178,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "SANGAM VIHAR CENTRAL": {
+    "aqi": 175,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "SANGAM VIHAR EAST": {
+    "aqi": 177,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "CHIRAG DELHI": {
+    "aqi": 175,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "CHITRANJAN PARK": {
+    "aqi": 176,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
   },
   "SHAPUR JAT": {
     "aqi": 174,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
   "GREATER KAILASH-I": {
-    "aqi": 178,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "SRI NIWASPURI": {
-    "aqi": 178,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "EAST OF KAILASH": {
-    "aqi": 179,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "GOVIND PURI": {
-    "aqi": 164,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "KALKAJI": {
-    "aqi": 178,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "TUGHLAKABAD": {
-    "aqi": 164,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "PUL PEHLAD": {
-    "aqi": 174,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "TEKHAND": {
-    "aqi": 175,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "HARKESH NAGAR": {
-    "aqi": 182,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "JAITPUR": {
-    "aqi": 176,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "MEETHEYPUR": {
-    "aqi": 175,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "BADAR PUR": {
-    "aqi": 175,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "MOLARBAND": {
-    "aqi": 175,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "OKHLA": {
-    "aqi": 179,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "TURKMAN GATE": {
-    "aqi": 172,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "BALLIMARAN": {
-    "aqi": 173,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "QASABPURA": {
-    "aqi": 173,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "PAHAR GANJ": {
-    "aqi": 167,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "SADH NAGAR": {
-    "aqi": 177,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "PUSA": {
-    "aqi": 160,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "INDER PURI": {
     "aqi": 165,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "NARAINA": {
-    "aqi": 152,
+  "SRI NIWASPURI": {
+    "aqi": 171,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "DEOLI": {
-    "aqi": 168,
+  "EAST OF KAILASH": {
+    "aqi": 162,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "CHHATARPUR": {
-    "aqi": 164,
+  "GOVIND PURI": {
+    "aqi": 182,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "AYA NAGAR": {
-    "aqi": 167,
+  "KALKAJI": {
+    "aqi": 182,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "BHATI": {
-    "aqi": 167,
+  "TUGHLAKABAD": {
+    "aqi": 182,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "MADANPUR KHADAR": {
-    "aqi": 176,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "SARITA VIHAR": {
-    "aqi": 180,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "GHONDLI": {
-    "aqi": 177,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "ANARKALI": {
-    "aqi": 176,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "GANDHI NAGAR": {
+  "PUL PEHLAD": {
     "aqi": 178,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "AZAD NAGAR": {
+  "TEKHAND": {
+    "aqi": 182,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "HARKESH NAGAR": {
+    "aqi": 185,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "JAITPUR": {
     "aqi": 179,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "RAGHUBAR PURA": {
+  "MEETHEYPUR": {
+    "aqi": 179,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "BADAR PUR": {
+    "aqi": 178,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "MOLARBAND": {
+    "aqi": 179,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "OKHLA": {
     "aqi": 181,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "SHAHDARA": {
+  "TURKMAN GATE": {
     "aqi": 176,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "JHILMIL": {
-    "aqi": 175,
+  "BALLIMARAN": {
+    "aqi": 176,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "VIVEK VIHAR": {
-    "aqi": 177,
+  "QASABPURA": {
+    "aqi": 176,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "DILSHAD COLONY": {
-    "aqi": 177,
+  "PAHAR GANJ": {
+    "aqi": 174,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "PUNJABI BAGH": {
+  "SADH NAGAR": {
+    "aqi": 180,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "PUSA": {
+    "aqi": 174,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "INDER PURI": {
+    "aqi": 173,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "NARAINA": {
     "aqi": 183,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "NEW RANJIT NAGAR": {
-    "aqi": 167,
+  "DEOLI": {
+    "aqi": 170,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "KIRTI NAGAR": {
-    "aqi": 169,
+  "CHHATARPUR": {
+    "aqi": 165,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "MANSAROWER GARDEN": {
-    "aqi": 150,
+  "AYA NAGAR": {
+    "aqi": 168,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "HASTSAL": {
+  "BHATI": {
+    "aqi": 168,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "MADANPUR KHADAR": {
+    "aqi": 180,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "SARITA VIHAR": {
+    "aqi": 182,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "GHONDLI": {
+    "aqi": 187,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "ANARKALI": {
+    "aqi": 189,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "GANDHI NAGAR": {
+    "aqi": 184,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "AZAD NAGAR": {
     "aqi": 186,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "RAGHUBAR PURA": {
+    "aqi": 186,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "SHAHDARA": {
+    "aqi": 187,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "JHILMIL": {
+    "aqi": 190,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "VIVEK VIHAR": {
+    "aqi": 187,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "DILSHAD COLONY": {
+    "aqi": 187,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "PUNJABI BAGH": {
+    "aqi": 185,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "NEW RANJIT NAGAR": {
+    "aqi": 168,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "KIRTI NAGAR": {
+    "aqi": 161,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "MANSAROWER GARDEN": {
+    "aqi": 188,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "HASTSAL": {
+    "aqi": 181,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
   },
   "SANGAM PARK": {
-    "aqi": 191,
+    "aqi": 188,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
   "MODEL TOWN": {
-    "aqi": 193,
+    "aqi": 188,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
   "KAMLA NAGAR": {
     "aqi": 182,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
   "INDER LOK COLONY": {
     "aqi": 179,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
   "KISHAN GANJ": {
-    "aqi": 179,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "DEPUTY GANJ": {
-    "aqi": 177,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "KASHMERE GATE": {
-    "aqi": 178,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "MAJNU KA TILA": {
-    "aqi": 195,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "JAMA MASJID": {
-    "aqi": 174,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "TILAK NAGAR": {
     "aqi": 180,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "DEPUTY GANJ": {
+    "aqi": 179,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "KASHMERE GATE": {
+    "aqi": 181,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "MAJNU KA TILA": {
+    "aqi": 196,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "JAMA MASJID": {
+    "aqi": 178,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "TILAK NAGAR": {
+    "aqi": 181,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
   },
   "MAJOR BHUPINDAR SINGH NAGAR": {
     "aqi": 182,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
   "VIKASPURI EAST": {
-    "aqi": 185,
+    "aqi": 182,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
   "MOHAN GARDEN": {
-    "aqi": 178,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "NAWADA": {
-    "aqi": 178,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "UTTAM NAGAR": {
-    "aqi": 178,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "BINDAPUR": {
     "aqi": 179,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "NAWADA": {
+    "aqi": 180,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "UTTAM NAGAR": {
+    "aqi": 180,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "BINDAPUR": {
+    "aqi": 181,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
   },
   "DABRI": {
-    "aqi": 176,
+    "aqi": 179,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
   "MATIALA": {
-    "aqi": 177,
+    "aqi": 179,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
   "ROSHANPURA": {
     "aqi": 179,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
   "MAYUR VIHAR PHASE-I": {
-    "aqi": 180,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "ROHINI": {
-    "aqi": 197,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "DALLOPURA": {
-    "aqi": 177,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "TRILOK PURI": {
-    "aqi": 181,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "NEW ASHOK NAGAR": {
-    "aqi": 179,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "KALYAN PURI": {
-    "aqi": 177,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "KHICHRIPUR": {
-    "aqi": 173,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "KONDLI": {
-    "aqi": 176,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "GHAROLI": {
-    "aqi": 175,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "VINOD NAGAR": {
-    "aqi": 180,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "ASHOK VIHAR": {
-    "aqi": 205,
-    "status": "POOR",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "WAJIRPUR": {
-    "aqi": 202,
-    "status": "POOR",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "SAWAN PARK": {
-    "aqi": 194,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "NIMRI COLONY": {
-    "aqi": 186,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "SHAKUR PUR": {
-    "aqi": 198,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "KOHAT ENCLAVE": {
-    "aqi": 194,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "RAMPURA": {
     "aqi": 187,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "TRI NAGAR": {
-    "aqi": 191,
+  "ROHINI": {
+    "aqi": 172,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "SARASWATI VIHAR": {
-    "aqi": 191,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "RANI BAGH": {
-    "aqi": 189,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "PASCHIM VIHAR NORTH": {
-    "aqi": 199,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "PASCHIM VIHAR SOUTH": {
+  "DALLOPURA": {
     "aqi": 186,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "SHALIMAR BAGH SOUTH": {
-    "aqi": 204,
-    "status": "POOR",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "SHALIMAR BAGH NORTH": {
-    "aqi": 203,
-    "status": "POOR",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "PITAMPUR NORTH": {
-    "aqi": 202,
-    "status": "POOR",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "PITAMPURA SOUTH": {
-    "aqi": 209,
-    "status": "POOR",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "NAHARPUR": {
-    "aqi": 195,
+  "TRILOK PURI": {
+    "aqi": 184,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "ROHINI EAST": {
-    "aqi": 198,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "ROHINI CENTRAL": {
-    "aqi": 213,
-    "status": "POOR",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "MANGOLPURI  WEST": {
-    "aqi": 202,
-    "status": "POOR",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "MANGOLPURI  EAST": {
-    "aqi": 195,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "ROHINI SOUTH": {
-    "aqi": 195,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "QUAMMRUDDIN NAGAR": {
-    "aqi": 210,
-    "status": "POOR",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "NANGLOI EAST": {
-    "aqi": 289,
-    "status": "POOR",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "PERAGHARHI": {
-    "aqi": 203,
-    "status": "POOR",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "GURU HARKISHAN NAGAR": {
-    "aqi": 195,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "SULTANPURI  SOUTH": {
-    "aqi": 222,
-    "status": "POOR",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "SULTANPURI  EAST": {
-    "aqi": 201,
-    "status": "POOR",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "KIRARI SULEMAN NAGAR": {
-    "aqi": 200,
-    "status": "POOR",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "KARALA": {
-    "aqi": 185,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "BEGUMPUR": {
-    "aqi": 185,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "POOTH KALAN": {
-    "aqi": 195,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "VIJAY VIHAR": {
-    "aqi": 195,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "GEETA COLONY": {
-    "aqi": 179,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "KRISHNA  NAGAR": {
-    "aqi": 177,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "PREET VIHAR": {
-    "aqi": 161,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "I.P EXTENTION": {
-    "aqi": 143,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "ANAND VIHAR": {
-    "aqi": 164,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "SHAKARPUR": {
-    "aqi": 186,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "LAXMI NAGAR": {
-    "aqi": 181,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "RITHALA": {
-    "aqi": 199,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "MAYUR VIHAR PHASE II": {
-    "aqi": 175,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "MANDAWALI": {
-    "aqi": 178,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "KARAM PURA": {
-    "aqi": 176,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "MAHAVIR ENCLAVE": {
-    "aqi": 180,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "SAGARPUR": {
-    "aqi": 173,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "SAGARPUR WEST": {
-    "aqi": 174,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "MUNDAKA": {
-    "aqi": 185,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "EAST PATEL NAGAR": {
-    "aqi": 175,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "WEST PATEL NAGAR": {
-    "aqi": 175,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "DEV NAGAR": {
-    "aqi": 169,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "KAROL BAGH": {
-    "aqi": 175,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "MODEL BASTI": {
-    "aqi": 174,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "RANA PRATAP BAGH": {
-    "aqi": 189,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "BAKHTAWAR PUR": {
+  "NEW ASHOK NAGAR": {
     "aqi": 183,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "ALIPUR": {
-    "aqi": 146,
+  "KALYAN PURI": {
+    "aqi": 186,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "SAHIBABAD DAULAT PUR": {
+  "KHICHRIPUR": {
+    "aqi": 190,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "KONDLI": {
+    "aqi": 187,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "GHAROLI": {
+    "aqi": 187,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "VINOD NAGAR": {
+    "aqi": 190,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "ASHOK VIHAR": {
+    "aqi": 192,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "WAJIRPUR": {
     "aqi": 191,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "BANKNER": {
+  "SAWAN PARK": {
+    "aqi": 191,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "NIMRI COLONY": {
+    "aqi": 183,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "SHAKUR PUR": {
+    "aqi": 186,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "KOHAT ENCLAVE": {
+    "aqi": 184,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "RAMPURA": {
+    "aqi": 183,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "TRI NAGAR": {
+    "aqi": 184,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "SARASWATI VIHAR": {
+    "aqi": 183,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "RANI BAGH": {
+    "aqi": 185,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "PASCHIM VIHAR NORTH": {
+    "aqi": 185,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "PASCHIM VIHAR SOUTH": {
+    "aqi": 184,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "SHALIMAR BAGH SOUTH": {
+    "aqi": 191,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "SHALIMAR BAGH NORTH": {
+    "aqi": 192,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "PITAMPUR NORTH": {
+    "aqi": 189,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "PITAMPURA SOUTH": {
+    "aqi": 189,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "NAHARPUR": {
+    "aqi": 177,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "ROHINI EAST": {
+    "aqi": 180,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "ROHINI CENTRAL": {
+    "aqi": 140,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "MANGOLPURI  WEST": {
+    "aqi": 185,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "MANGOLPURI  EAST": {
+    "aqi": 183,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "ROHINI SOUTH": {
+    "aqi": 177,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "QUAMMRUDDIN NAGAR": {
+    "aqi": 190,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "NANGLOI EAST": {
+    "aqi": 219,
+    "status": "POOR",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "PERAGHARHI": {
+    "aqi": 187,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "GURU HARKISHAN NAGAR": {
+    "aqi": 185,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "SULTANPURI  SOUTH": {
+    "aqi": 193,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "SULTANPURI  EAST": {
+    "aqi": 184,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "KIRARI SULEMAN NAGAR": {
+    "aqi": 184,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "KARALA": {
     "aqi": 178,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "BEGUMPUR": {
+    "aqi": 177,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "POOTH KALAN": {
+    "aqi": 171,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "VIJAY VIHAR": {
+    "aqi": 177,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "GEETA COLONY": {
+    "aqi": 186,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "KRISHNA  NAGAR": {
+    "aqi": 186,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "PREET VIHAR": {
+    "aqi": 202,
+    "status": "POOR",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "I.P EXTENTION": {
+    "aqi": 219,
+    "status": "POOR",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "ANAND VIHAR": {
+    "aqi": 199,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "SHAKARPUR": {
+    "aqi": 193,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "LAXMI NAGAR": {
+    "aqi": 189,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "RITHALA": {
+    "aqi": 168,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "MAYUR VIHAR PHASE II": {
+    "aqi": 190,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "MANDAWALI": {
+    "aqi": 191,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "KARAM PURA": {
+    "aqi": 175,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "MAHAVIR ENCLAVE": {
+    "aqi": 182,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "SAGARPUR": {
+    "aqi": 177,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "SAGARPUR WEST": {
+    "aqi": 178,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "MUNDAKA": {
+    "aqi": 179,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "EAST PATEL NAGAR": {
+    "aqi": 174,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "WEST PATEL NAGAR": {
+    "aqi": 174,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "DEV NAGAR": {
+    "aqi": 170,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "KAROL BAGH": {
+    "aqi": 176,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "MODEL BASTI": {
+    "aqi": 177,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "RANA PRATAP BAGH": {
+    "aqi": 187,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "BAKHTAWAR PUR": {
+    "aqi": 189,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "ALIPUR": {
+    "aqi": 201,
+    "status": "POOR",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "SAHIBABAD DAULAT PUR": {
+    "aqi": 179,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "BANKNER": {
+    "aqi": 186,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
   },
   "MALKAGANJ": {
     "aqi": 183,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
   "JHARODA": {
-    "aqi": 189,
+    "aqi": 190,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
   "MUKUND PUR": {
-    "aqi": 192,
+    "aqi": 190,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
   "BAWANA": {
-    "aqi": 182,
+    "aqi": 180,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
   "BHALSWA": {
-    "aqi": 215,
-    "status": "POOR",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "SAMAYPUR BADLI": {
-    "aqi": 204,
-    "status": "POOR",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "JAHANGIRPURI-I": {
-    "aqi": 213,
-    "status": "POOR",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "SARAI PIPAL THALA": {
     "aqi": 209,
     "status": "POOR",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "SAMAYPUR BADLI": {
+    "aqi": 193,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "JAHANGIRPURI-I": {
+    "aqi": 207,
+    "status": "POOR",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "SARAI PIPAL THALA": {
+    "aqi": 200,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
   },
   "MAHIPALPUR": {
-    "aqi": 168,
+    "aqi": 170,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
   "KAPASHERA": {
-    "aqi": 216,
+    "aqi": 219,
     "status": "POOR",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
   "BIJWASAN": {
-    "aqi": 199,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "ADARASH  NAGAR": {
     "aqi": 201,
     "status": "POOR",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "DHIR PUR": {
-    "aqi": 202,
-    "status": "POOR",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "G.T.B. NAGAR": {
+  "ADARASH  NAGAR": {
     "aqi": 191,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "DHIR PUR": {
+    "aqi": 197,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "G.T.B. NAGAR": {
+    "aqi": 189,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
   },
   "TIMAR PUR": {
     "aqi": 200,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
   "RAJA GARDEN": {
-    "aqi": 170,
+    "aqi": 185,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
   "RAGHUBIR NAGAR": {
-    "aqi": 178,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "RAJOURI GARDEN": {
-    "aqi": 172,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "NANGAL RAYA": {
-    "aqi": 172,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "HARI NAGAR": {
-    "aqi": 166,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "SUBHASH NAGAR": {
-    "aqi": 166,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "MADHU VIHAR": {
-    "aqi": 178,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "BUDH VIHAR": {
-    "aqi": 195,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "NANGLOI JAT WEST": {
-    "aqi": 192,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "NITHARI": {
-    "aqi": 192,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "SULTANPUR MAJRA": {
-    "aqi": 200,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "ROHINI NORTH": {
-    "aqi": 196,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "LIBAS PUR": {
-    "aqi": 195,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "BRAHAM PURI": {
-    "aqi": 191,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "DICHAON KALAN": {
     "aqi": 184,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "MOTI NAGAR": {
-    "aqi": 179,
+  "RAJOURI GARDEN": {
+    "aqi": 183,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "MANGOLPURI": {
-    "aqi": 196,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "LAJPAT NAGAR": {
-    "aqi": 179,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "PALAM": {
-    "aqi": 185,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "KISHANGARH": {
-    "aqi": 171,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "VISHWASH NAGAR": {
-    "aqi": 175,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "MADIPUR": {
-    "aqi": 188,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "RAJENDER NAGAR": {
-    "aqi": 162,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "R. K. PURAM": {
-    "aqi": 164,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "SAFDARJANG ENCLAVE": {
-    "aqi": 170,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "HAUZ KHAS": {
-    "aqi": 175,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "KOTLA MUBARAKPUR": {
-    "aqi": 171,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "MANGLAPURI": {
-    "aqi": 178,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "MANGOL PURI  NORTH": {
-    "aqi": 198,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "TAGORE GARDEN": {
+  "NANGAL RAYA": {
     "aqi": 177,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "LADOSARAI": {
-    "aqi": 165,
+  "HARI NAGAR": {
+    "aqi": 180,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "NARELA": {
-    "aqi": 176,
+  "SUBHASH NAGAR": {
+    "aqi": 182,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "BHALASWA JAHAGIR PUR": {
-    "aqi": 189,
+  "MADHU VIHAR": {
+    "aqi": 180,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "BURARI": {
-    "aqi": 187,
+  "BUDH VIHAR": {
+    "aqi": 175,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "PATPARGANJ": {
-    "aqi": 185,
+  "NANGLOI JAT WEST": {
+    "aqi": 182,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "PANDAV NAGAR": {
-    "aqi": 193,
+  "NITHARI": {
+    "aqi": 180,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "KISHAN KUNJ": {
-    "aqi": 179,
+  "SULTANPUR MAJRA": {
+    "aqi": 183,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "DHARAMPURA": {
+  "ROHINI NORTH": {
+    "aqi": 178,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "LIBAS PUR": {
+    "aqi": 190,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "BRAHAM PURI": {
+    "aqi": 194,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "DICHAON KALAN": {
     "aqi": 181,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "NEW USMANPUR": {
-    "aqi": 185,
+  "MOTI NAGAR": {
+    "aqi": 178,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "BHAJANPURA": {
-    "aqi": 201,
-    "status": "POOR",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "NEHRU VIHAR": {
-    "aqi": 198,
+  "MANGOLPURI": {
+    "aqi": 182,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "SAID UL AJAIB": {
-    "aqi": 171,
+  "LAJPAT NAGAR": {
+    "aqi": 154,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "SANGAM VIHAR": {
-    "aqi": 171,
+  "PALAM": {
+    "aqi": 187,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "MEHRAULI": {
-    "aqi": 165,
-    "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
-  },
-  "SANGAM VIHAR WEST": {
+  "KISHANGARH": {
     "aqi": 172,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
-  "TIGRI": {
+  "VISHWASH NAGAR": {
+    "aqi": 188,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "MADIPUR": {
+    "aqi": 184,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "RAJENDER NAGAR": {
     "aqi": 171,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "R. K. PURAM": {
+    "aqi": 173,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "SAFDARJANG ENCLAVE": {
+    "aqi": 173,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "HAUZ KHAS": {
+    "aqi": 177,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "KOTLA MUBARAKPUR": {
+    "aqi": 175,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "MANGLAPURI": {
+    "aqi": 180,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "MANGOL PURI  NORTH": {
+    "aqi": 182,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "TAGORE GARDEN": {
+    "aqi": 181,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "LADOSARAI": {
+    "aqi": 167,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "NARELA": {
+    "aqi": 188,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "BHALASWA JAHAGIR PUR": {
+    "aqi": 190,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "BURARI": {
+    "aqi": 189,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "PATPARGANJ": {
+    "aqi": 190,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "PANDAV NAGAR": {
+    "aqi": 196,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "KISHAN KUNJ": {
+    "aqi": 185,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "DHARAMPURA": {
+    "aqi": 185,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "NEW USMANPUR": {
+    "aqi": 189,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "BHAJANPURA": {
+    "aqi": 203,
+    "status": "POOR",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "NEHRU VIHAR": {
+    "aqi": 201,
+    "status": "POOR",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "SAID UL AJAIB": {
+    "aqi": 174,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "SANGAM VIHAR": {
+    "aqi": 174,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "MEHRAULI": {
+    "aqi": 166,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "SANGAM VIHAR WEST": {
+    "aqi": 174,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
+  },
+  "TIGRI": {
+    "aqi": 174,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
   },
   "ZAKIR NAGAR": {
-    "aqi": 179,
+    "aqi": 181,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
   "NAJAFGARH": {
     "aqi": 181,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
   "JAHANGIR PURI -II": {
-    "aqi": 215,
+    "aqi": 209,
     "status": "POOR",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
   "KUNWAR SINGH NAGAR": {
-    "aqi": 189,
+    "aqi": 182,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
   "VIKAS NAGAR": {
     "aqi": 181,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
   "VIKAS PURI": {
-    "aqi": 180,
+    "aqi": 181,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
   "MAHAVIR NAGAR": {
     "aqi": 181,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
   "DARYAGANJ": {
-    "aqi": 176,
+    "aqi": 180,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
   "BALJIT NAGAR": {
-    "aqi": 162,
+    "aqi": 170,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
   "NILOTHI": {
-    "aqi": 194,
+    "aqi": 184,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
   "PRATAP VIHAR": {
-    "aqi": 203,
-    "status": "POOR",
-    "lastUpdated": "2026-04-15 05:28"
+    "aqi": 186,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
   },
   "PREM NAGAR": {
-    "aqi": 200,
-    "status": "POOR",
-    "lastUpdated": "2026-04-15 05:28"
+    "aqi": 184,
+    "status": "MODERATE",
+    "lastUpdated": "2026-04-15 07:55"
   },
   "SHASTRI NAGAR": {
     "aqi": 180,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
   "VISHNU GARDEN": {
-    "aqi": 179,
+    "aqi": 181,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
   "TUKHMIR PUR": {
-    "aqi": 207,
+    "aqi": 209,
     "status": "POOR",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   },
   "RAJ NAGAR": {
-    "aqi": 197,
+    "aqi": 200,
     "status": "MODERATE",
-    "lastUpdated": "2026-04-15 05:28"
+    "lastUpdated": "2026-04-15 07:55"
   }
 }
